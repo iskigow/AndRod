@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./templateAndrod.xhtml">
+
+    <ui:define name="tituloFuncionalidade">
+        <h:outputLabel value="Bem Vindo(a) - #{usuarioMB.nomeResumido}" />
+    </ui:define>
+
+    <ui:define name="content" >
+        
+        <f:view>
+            <div id="menu">
+                <h:form>
+                    <h:panelGrid  columns="2" cellpadding="20px" rendered="#{not empty sessionScope['usuarioLogado']}">
+
+                        <h:commandLink action="#{usuarioMB.editaUsuario}"  >
+                            <h:graphicImage url="/imagens/interno/icone_atualizacao.png"/>
+                            <h:outputText value="Usuário"/>
+                        </h:commandLink>
+
+                        <h:commandLink action="#{dependenteSelMB.listaDependente}">
+                            <h:graphicImage url="/imagens/interno/icone_dependentes.png"/>
+                            <h:outputText value="Dependentes"/>
+                        </h:commandLink>
+
+                        <h:commandLink action="financaman">
+                            <h:graphicImage url="/imagens/interno/icone_financa.png"/>
+                            <h:outputText value="Finanças"/>
+                        </h:commandLink>
+
+                        <h:commandLink action="classificacaosel">
+                            <h:graphicImage url="/imagens/interno/icone_classificacao.png"/>
+                            <h:outputText value="Classificações da Finança"/>
+                        </h:commandLink>
+
+                        <h:commandLink action="relatorios"  >
+                            <h:graphicImage url="/imagens/interno/icone_relatorio.png"/>
+                            <h:outputText value="Relatórios"/>
+                        </h:commandLink>
+
+                        <h:commandLink action="graficos"  >
+                            <h:graphicImage url="/imagens/interno/icone_relatorio.png"/>
+                            <h:outputText value="Gráficos"/>
+                        </h:commandLink>
+
+                    </h:panelGrid>
+                </h:form>
+            </div>
+        </f:view>
+    </ui:define>
+</ui:composition>

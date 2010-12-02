@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="./templateAndrod.xhtml">
+
+    <ui:define name="content">
+
+         <f:view>
+
+             <h:form>
+
+                 <h:panelGrid>
+
+
+                        <rich:modalPanel id="panel" width="800" height="600">
+
+                            <f:facet name="header">
+
+                                <h:panelGroup>
+                                    <h:outputText value="Relatório Usuário / Dependente"></h:outputText>
+                                </h:panelGroup>
+
+                            </f:facet>
+
+                            <f:facet name="controls">
+
+                                <h:panelGroup>
+
+                                    <h:graphicImage value="/imagens/icone_fechar.png" styleClass="hidelink" id="hidelink"/>
+                                    <rich:componentControl for="panel" attachTo="hidelink" operation="hide" event="onclick"/>
+
+                                </h:panelGroup>
+
+                            </f:facet>
+
+                             <h:commandLink action = "#{usuarioMB.usuarioRelatorio}">
+                                relatorio
+                            </h:commandLink>
+
+                    </rich:modalPanel>
+
+                    <h:outputLink value="#" id="link">
+                        Show Modal Panel
+                        <rich:componentControl for="panel" attachTo="link" operation="show" event="onclick"/>
+                    </h:outputLink>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

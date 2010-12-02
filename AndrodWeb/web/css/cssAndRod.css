@@ -1,0 +1,154 @@
+/* 
+    Document   : cssAndRod
+    Created on : 30/11/2010, 01:29:56
+    Author     : iskigow
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#top {
+    position: relative;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#bottom {
+    height: 20px;
+    position: static;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+
+#titulo{
+        margin: 10px;
+	height:48px;
+	z-index:3;
+}
+#titulo img{
+	width:48px;
+	border:0px solid;
+}
+#titulo td{
+	font-style:normal;
+	font-weight:normal;
+	text-decoration:none;
+	border:0;
+}
+
+#tituloFuncionalidade {
+    font-weight: bold;
+    position: relative;
+    float: left;
+    width: 60%;
+}
+
+#tituloDataHora {
+    position: relative;
+    float: right;
+    width: 30%;
+}
+
+#fildsetAcesso {
+    display: block;
+    vertical-align: middle;
+}
+
+#content div{
+    height: 60%;
+}
+
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF;
+    font-size:  24px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: black;
+}
+
+#tituloFuncionalidade a:link, a:visited{
+    color: black;
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#painelLogout {
+    position: relative;
+    float: left;
+    width: 60%;
+}
+
+#tituloUltimoAcesso {
+    position: relative;
+    float: right;
+    width: 30%;
+}

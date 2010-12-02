@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="./templateAndrod.xhtml">
+
+    <ui:define name="tituloFuncionalidade">
+        <h:form>
+        <h:commandLink action="home">
+            <h:outputLabel value="Home"/>
+        </h:commandLink> &gt; <h:outputLabel id="tituloFuncionalidade" rendered="true" value="#{bundle.cadastrarFinanca}"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/js/jquery.maskedinput-1.2.1.js"></script>
+        <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/js/autoNumeric-1.6.2.js"></script>
+        <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/js/autoLoader.js"></script>
+
+         <f:view>
+
+             <style type="text/css">
+                .ecol1 { vertical-align: top; padding-right : 25px }
+                .ecol2 { vertical-align: top; border-left: #ACBECE 1px solid; padding-left : 10px }
+                .rich-calendar-tool-btn{
+                    font-family: Arial, Verdana;
+                }
+            </style>
+
+            <h:form id="financaForm">
+
+                <h:commandButton value="#{bundle.novo}" action="#{financaMB.novo}" immediate="true"/>
+                <h:commandButton value="#{bundle.gravar}" action="#{financaMB.gravar}"/>
+                <h:commandButton id="todos" rendered="true" value="#{bundle.visualizar}" action="financasel" immediate="true"/>
+
+                <!-- Tag utilizada para exibir mensagens de sucesso -->
+                <h:messages errorStyle="color: white; background-color: tomato;" infoStyle="color: white; background-color: steelblue;" globalOnly="true" layout="table" />
+
+                <h:inputHidden id="MODO" value="#{financaMB.MODO}"/>
+
+                <h:panelGrid columns="1">
+
+               <h:panelGroup layout="block">
+                    <h:outputLabel id="tipoFinancaLabel" rendered="true" value="#{bundle.tipoFinanca}" for="tipoFinancaInput"/><br/>
+                    <rich:comboBox id="tipoFinancaInput" value="#{financaMB.tipoFinanca}" required="true" label="#{bundle.tipoFinanca}">
+                        <f:selectItem itemValue="#{financaMB.credito}" itemLabel="#{financaMB.credito.nome}" />
+                        <f:selectItem itemValue="#{financaMB.debito}" itemLabel="#{financaMB.debito.nome}" />
+                    </rich:comboBox>
+                    <h:message id="tipoFinancaMsg" for="tipoFinancaInput" errorStyle="color: red"/>
+               </h:panelGroup>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="3">
+
+                    <h:panelGroup layout="block">
+                        <h:outputLabel id="descricaoLabel" rendered="true" value="#{bundle.descricao}" for="descricaoInput"/><br />
+                        <h:inputText id="descricaoInput" value="#{financaMB.descricao}" required="true" label="#{bundle.descricao}"
+                                     size="50" maxlength="100">
+                            <f:validateLength minimum="4" maximum="100" />
+                        </h:inputText><br/>
+                        <h:message id="descricaoMsg" for="descricaoInput" errorStyle="color: red" />
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block">
+                        <h:outputLabel id="dataLabel" rendered="true" value="#{bundle.data}" for="dataInput"/><br />
+                        <rich:calendar id="dataInput" value="#{financaMB.dataFinanca}" required="true" inputSize="10"
+                                         timeZone="#{financaMB.timeZone}" datePattern="dd/MM/yyyy"
+                                         locale="ptBR" showWeeksBar="false" todayControlMode="scroll" label="#{bundle.data}"
+                                         showApplyButton="false" cellWidth="24px"
+                                         weekDayLabelsShort="Dom,Seg,Ter,Qua,Qui,Sex,Sab"
+                                         monthLabelsShort="Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez"
+                                         monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+                                         cellHeight="22px" style="width:200px"/><br/>
+                        <h:message id="dataMsg" for="dataInput" errorStyle="color: red"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block">
+                        <h:outputLabel id="valorLabel" rendered="true" value="#{bundle.valor}" for="valorInput"/><br />
+                        <h:inputText id="valorInput" value="#{financaMB.valor}" style="text-align: right;" size="25" maxlength="25" styleClass="valor" required="true" label="#{bundle.valor}">
+                            <f:convertNumber id="valorConverter" locale="pt-BR" minFractionDigits="2" maxFractionDigits="2" maxIntegerDigits="7" groupingUsed="true" />
+                        </h:inputText><br/>
+                        <h:message id="valorMsg" for="valorInput" errorStyle="color: red"/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>

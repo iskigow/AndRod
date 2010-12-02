@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="1.2" 
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+    <application>
+        
+        <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+
+        <!-- message-bundle deve ser utilizada para as mensagens de validação customizadas -->
+	<message-bundle>androd.resources.ResourcesMessages</message-bundle>
+
+        <resource-bundle>
+            <base-name>androd.resources.ResourcesMessages</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+
+    </application>
+
+    <validator>
+        <validator-id>validadorEmail</validator-id>
+        <validator-class>androd.helper.EmailValidator</validator-class>
+    </validator>
+
+    <managed-bean>
+        <managed-bean-name>usuarioMB</managed-bean-name>
+        <managed-bean-class>usuario.ctr.mb.UsuarioMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>dependenteMB</managed-bean-name>
+        <managed-bean-class>usuario.ctr.mb.DependenteMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>usuarioAutenticaMB</managed-bean-name>
+        <managed-bean-class>usuario.ctr.mb.UsuarioAutenticaMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>dependenteSelMB</managed-bean-name>
+        <managed-bean-class>usuario.ctr.mb.DependenteSelMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>classificacaoFinancaMB</managed-bean-name>
+        <managed-bean-class>financa.ctr.mb.ClassificacaoFinancaMB</managed-bean-class>
+
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+
+     <managed-bean>
+        <managed-bean-name>classificacaoFinancaSelMB</managed-bean-name>
+        <managed-bean-class>financa.ctr.mb.ClassificacaoFinancaSelMB</managed-bean-class>
+
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>relatorioMB</managed-bean-name>
+        <managed-bean-class>relatorio.ctr.mb.RelatorioMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>graficoMB</managed-bean-name>
+        <managed-bean-class>grafico.ctr.mb.GraficoMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>financaMB</managed-bean-name>
+        <managed-bean-class>financa.ctr.mb.FinancaMB</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <navigation-rule>
+
+        <from-view-id>/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>logado</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>deslogado</from-outcome>
+            <to-view-id>/usuariologin.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>usuarioman</from-outcome>
+            <to-view-id>/usuarioman.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>dependenteman</from-outcome>
+            <to-view-id>/dependenteman.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>dependentesel</from-outcome>
+            <to-view-id>/dependentesel.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>classificacaosel</from-outcome>
+            <to-view-id>/classificacaofinancasel.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>classificacaoman</from-outcome>
+            <to-view-id>/classificacaofinancaman.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>emitirrelatoriousuariorel</from-outcome>
+            <to-view-id>/emitirrelatoriousuariorel.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>relatorios</from-outcome>
+            <to-view-id>/relatorios.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>graficos</from-outcome>
+            <to-view-id>/graficos.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>financaman</from-outcome>
+            <to-view-id>/financaman.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+    
+</faces-config>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../css/cssAndRod.css" rel="stylesheet" type="text/css" />
+        <title>AndRod - Sistema de Controle Financeiro Pessoal</title>
+    </head>
+    
+    <body>
+
+        <div id="top">
+            <table id="titulo" class="relativeComponent titulo" >
+                <tr>
+                    <td align="center"><h:graphicImage id="logo" alt="#" url="/imagens/externo/logo.png" /></td>
+                    <td valign="middle" align="center"><h1>AndRod - Sistema de Controle Financeiro Pessoal</h1></td>
+                </tr>
+            </table>
+            <div>
+                <div id="tituloFuncionalidade">
+                    <ui:insert name="tituloFuncionalidade">AndRod</ui:insert>
+                </div>
+                <div id="tituloDataHora" align="right">
+                    <h:outputText value="Data/Hora: "/>
+                    <h:outputText value="#{usuarioMB.dataAtual}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />
+                    </h:outputText>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        <div id="bottom">
+            <h:form rendered="#{not empty sessionScope['usuarioLogado']}">
+                <div id="painelLogout">
+                    <h:commandLink action="#{usuarioAutenticaMB.autenticaLogout}">
+                        <h:outputText value="Logout"/>
+                    </h:commandLink>
+                </div>
+                <div id="tituloUltimoAcesso" align="right" >
+                    <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="Último acesso: "/>
+                    <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="#{usuarioMB.ultimoAcesso}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />
+                    </h:outputText>
+                </div>
+            </h:form>
+        </div>
+    </body>
+</html>
