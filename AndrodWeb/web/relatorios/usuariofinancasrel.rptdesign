@@ -445,7 +445,9 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
             <property name="orientation">landscape</property>
             <property name="topMargin">0.25in</property>
             <property name="leftMargin">0.25in</property>
+            <property name="bottomMargin">0in</property>
             <property name="headerHeight">1.3in</property>
+            <property name="footerHeight">0in</property>
             <page-header>
                 <grid id="10">
                     <column id="11"/>
@@ -688,18 +690,6 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                     <cell id="122"/>
                     <cell id="123"/>
                 </row>
-                <row id="124">
-                    <cell id="125">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                        <label id="128">
-                            <property name="fontSize">11pt</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="marginLeft">10pt</property>
-                            <text-property name="text">Finanças:</text-property>
-                        </label>
-                    </cell>
-                </row>
             </header>
             <detail>
                 <row id="32">
@@ -783,6 +773,17 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                             </list-property>
                             <column id="262"/>
                             <header>
+                                <row id="391">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="392">
+                                        <label id="128">
+                                            <property name="fontSize">11pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginLeft">auto</property>
+                                            <text-property name="text">Finanças:</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
                                 <row id="284">
                                     <property name="fontWeight">bold</property>
                                     <cell id="285">
@@ -942,10 +943,6 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                                         </grid>
                                     </cell>
                                 </row>
-                                <row id="318">
-                                    <property name="height">0.09375in</property>
-                                    <cell id="319"/>
-                                </row>
                             </detail>
                             <footer>
                                 <row id="325">
@@ -1026,6 +1023,16 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                 </row>
             </detail>
             <footer>
+                <row id="387">
+                    <cell id="388"/>
+                    <cell id="389"/>
+                    <cell id="390"/>
+                </row>
+                <row id="383">
+                    <cell id="384"/>
+                    <cell id="385"/>
+                    <cell id="386"/>
+                </row>
                 <row id="43">
                     <cell id="46"/>
                     <cell id="47"/>
