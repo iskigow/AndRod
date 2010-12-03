@@ -1996,9 +1996,6 @@ group by fin.tipofinanca]]></xml-property>
                                         </grid>
                                     </cell>
                                 </row>
-                                <row id="341">
-                                    <cell id="342"/>
-                                </row>
                             </footer>
                         </table>
                     </cell>
