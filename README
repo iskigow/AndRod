@@ -1,4 +1,21 @@
 AndRod - Sistema de planejamento pessoal
 
 Projeto NetBeans.
-Java 6
+Java 6.
+
+libs Androd:
+- EclipseLink(JPA2.0)
+- PostgreSQL JDBC Driver
+- log4j-1.2.16.jar
+
+libs AndrodWeb:
+- JSF 1.2 + Facelets 1.1.14
+- Androd - dist/Androd.jar
+- JSTL 1.1
+- richfaces-ui-3.3.3.Final.jar
+- richfaces-api-3.3.3.Final.jar
+- richfaces-impl-3.3.3.Final.jar
+- richfaces-impl-jsf2-3.3.3.Final.jar
+- log4j-1.2.16.jar
+
+COMMIT ANDRE
