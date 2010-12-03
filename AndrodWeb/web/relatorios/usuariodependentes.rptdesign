@@ -871,13 +871,6 @@ from dependente dep inner join pessoa pes on dep.id = pes.id where dep.idusuario
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="43">
-                    <cell id="46"/>
-                    <cell id="47"/>
-                    <cell id="56"/>
-                </row>
-            </footer>
         </table>
     </body>
     <list-property name="images">

@@ -1022,23 +1022,6 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="387">
-                    <cell id="388"/>
-                    <cell id="389"/>
-                    <cell id="390"/>
-                </row>
-                <row id="383">
-                    <cell id="384"/>
-                    <cell id="385"/>
-                    <cell id="386"/>
-                </row>
-                <row id="43">
-                    <cell id="46"/>
-                    <cell id="47"/>
-                    <cell id="56"/>
-                </row>
-            </footer>
         </table>
     </body>
     <list-property name="images">
