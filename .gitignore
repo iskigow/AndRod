@@ -2,6 +2,7 @@ Androd/build.xml
 Androd/build/
 Androd/dist/
 Androd/lib/
+Androd/manifest.mf
 Androd/nbproject/
 AndrodWeb/build.xml
 AndrodWeb/build/
