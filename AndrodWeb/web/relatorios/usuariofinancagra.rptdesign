@@ -707,42 +707,135 @@ group by fin.tipofinanca]]></xml-property>
                     <cell id="122"/>
                     <cell id="123"/>
                 </row>
-                <row id="124">
-                    <cell id="125">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                        <label id="128">
-                            <property name="fontSize">11pt</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="marginLeft">10pt</property>
-                            <text-property name="text">Finanças:</text-property>
-                        </label>
-                    </cell>
-                </row>
-                <row id="381">
-                    <cell id="382"/>
-                    <cell id="383"/>
-                    <cell id="384"/>
-                </row>
-                <row id="393">
-                    <cell id="394">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                        <label id="344">
-                            <property name="fontSize">14pt</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="textAlign">center</property>
-                            <text-property name="text">Representação gráfica das Finanças: Despesas X Receitas</text-property>
-                        </label>
-                    </cell>
-                </row>
                 <row id="385">
                     <property name="textAlign">center</property>
                     <cell id="386">
                         <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
-                        <extended-item extensionName="Chart" id="338">
-                            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="32">
+                    <cell id="37">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <table id="255">
+                            <property name="marginLeft">15pt</property>
+                            <property name="dataSet">financa</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">id</property>
+                                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">datafinanca</property>
+                                    <expression name="expression" type="javascript">dataSetRow["datafinanca"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">valor</property>
+                                    <expression name="expression" type="javascript">dataSetRow["valor"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">descricao</property>
+                                    <expression name="expression" type="javascript">dataSetRow["descricao"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">tipofinanca</property>
+                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">datacadastro</property>
+                                    <expression name="expression" type="javascript">dataSetRow["datacadastro"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">descricaofinanca</property>
+                                    <expression name="expression" type="javascript">dataSetRow["descricaofinanca"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">totalfinancas</property>
+                                    <property name="dataType">integer</property>
+                                    <property name="aggregateFunction">COUNT</property>
+                                    <list-property name="arguments">
+                                        <structure>
+                                            <property name="name">Expression</property>
+                                            <expression name="value" type="javascript">row["id"]</expression>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                                <structure>
+                                    <property name="name">porcentagemfinancas</property>
+                                    <property name="dataType">float</property>
+                                    <property name="aggregateFunction">PERCENTILE</property>
+                                    <list-property name="arguments">
+                                        <structure>
+                                            <property name="name">Expression</property>
+                                            <expression name="value" type="javascript">row["valor"]</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">percentage</property>
+                                            <expression name="value" type="javascript">dataSetRow["tipofinanca"]</expression>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                                <structure>
+                                    <property name="name">totaldespesas</property>
+                                    <property name="dataType">float</property>
+                                    <property name="aggregateFunction">SUM</property>
+                                    <list-property name="arguments">
+                                        <structure>
+                                            <property name="name">Expression</property>
+                                            <expression name="value" type="javascript">row["valor"]</expression>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'DEBITO'</expression>
+                                </structure>
+                                <structure>
+                                    <property name="name">totalreceitas</property>
+                                    <property name="dataType">float</property>
+                                    <property name="aggregateFunction">SUM</property>
+                                    <list-property name="arguments">
+                                        <structure>
+                                            <property name="name">Expression</property>
+                                            <expression name="value" type="javascript">row["valor"]</expression>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'CREDITO'</expression>
+                                </structure>
+                            </list-property>
+                            <property name="pageBreakInterval">0</property>
+                            <column id="262"/>
+                            <header>
+                                <row id="403">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="404">
+                                        <label id="344">
+                                            <property name="fontSize">14pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">Representação gráfica das Finanças: Despesas X Receitas</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="401">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="402">
+                                        <property name="textAlign">center</property>
+                                    </cell>
+                                </row>
+                                <row id="397">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="398">
+                                        <property name="textAlign">center</property>
+                                        <extended-item extensionName="Chart" id="338">
+                                            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
   <Type>Pie Chart</Type>
   <SubType>Standard</SubType>
@@ -1623,141 +1716,53 @@ group by fin.tipofinanca]]></xml-property>
   <Coverage>0.75</Coverage>
 </model:ChartWithoutAxes>
 ]]></xml-property>
-                            <property name="outputFormat">SVG</property>
-                            <property name="inheritColumns">false</property>
-                            <property name="display">inline</property>
-                            <property name="dataSet">grafinanca</property>
-                            <property name="height">3.0729166666666665in</property>
-                            <property name="width">7.96875in</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">count</property>
-                                    <expression name="expression" type="javascript">dataSetRow["count"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">tipofinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">totalFinancas</property>
-                                    <property name="dataType">decimal</property>
-                                    <property name="aggregateFunction">SUM</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["count"]</expression>
-                                        </structure>
-                                    </list-property>
-                                </structure>
-                            </list-property>
-                        </extended-item>
-                    </cell>
-                </row>
-                <row id="389">
-                    <cell id="390"/>
-                    <cell id="391"/>
-                    <cell id="392"/>
-                </row>
-            </header>
-            <detail>
-                <row id="32">
-                    <cell id="37">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                        <table id="255">
-                            <property name="marginLeft">15pt</property>
-                            <property name="dataSet">financa</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">id</property>
-                                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">datafinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["datafinanca"]</expression>
-                                    <property name="dataType">date</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">valor</property>
-                                    <expression name="expression" type="javascript">dataSetRow["valor"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">descricao</property>
-                                    <expression name="expression" type="javascript">dataSetRow["descricao"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">tipofinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">datacadastro</property>
-                                    <expression name="expression" type="javascript">dataSetRow["datacadastro"]</expression>
-                                    <property name="dataType">date</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">descricaofinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["descricaofinanca"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">totalfinancas</property>
-                                    <property name="dataType">integer</property>
-                                    <property name="aggregateFunction">COUNT</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["id"]</expression>
-                                        </structure>
-                                    </list-property>
-                                </structure>
-                                <structure>
-                                    <property name="name">porcentagemfinancas</property>
-                                    <property name="dataType">float</property>
-                                    <property name="aggregateFunction">PERCENTILE</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["valor"]</expression>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">percentage</property>
-                                            <expression name="value" type="javascript">dataSetRow["tipofinanca"]</expression>
-                                        </structure>
-                                    </list-property>
-                                </structure>
-                                <structure>
-                                    <property name="name">totaldespesas</property>
-                                    <property name="dataType">float</property>
-                                    <property name="aggregateFunction">SUM</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["valor"]</expression>
-                                        </structure>
-                                    </list-property>
-                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'DEBITO'</expression>
-                                </structure>
-                                <structure>
-                                    <property name="name">totalreceitas</property>
-                                    <property name="dataType">float</property>
-                                    <property name="aggregateFunction">SUM</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["valor"]</expression>
-                                        </structure>
-                                    </list-property>
-                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'CREDITO'</expression>
-                                </structure>
-                            </list-property>
-                            <column id="262"/>
-                            <header>
+                                            <property name="outputFormat">SVG</property>
+                                            <property name="inheritColumns">false</property>
+                                            <property name="display">inline</property>
+                                            <property name="dataSet">grafinanca</property>
+                                            <property name="height">3.0729166666666665in</property>
+                                            <property name="width">7.96875in</property>
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">count</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                                                    <property name="dataType">decimal</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">tipofinanca</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">totalFinancas</property>
+                                                    <property name="dataType">decimal</property>
+                                                    <property name="aggregateFunction">SUM</property>
+                                                    <list-property name="arguments">
+                                                        <structure>
+                                                            <property name="name">Expression</property>
+                                                            <expression name="value" type="javascript">row["count"]</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                </structure>
+                                            </list-property>
+                                        </extended-item>
+                                    </cell>
+                                </row>
+                                <row id="395">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="396"/>
+                                </row>
+                                <row id="405">
+                                    <property name="fontWeight">bold</property>
+                                    <cell id="406">
+                                        <label id="128">
+                                            <property name="fontSize">11pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <text-property name="text">Finanças:</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
                                 <row id="284">
                                     <property name="fontWeight">bold</property>
                                     <cell id="285">
@@ -1917,10 +1922,6 @@ group by fin.tipofinanca]]></xml-property>
                                         </grid>
                                     </cell>
                                 </row>
-                                <row id="335">
-                                    <property name="height">0.09375in</property>
-                                    <cell id="336"/>
-                                </row>
                             </detail>
                             <footer>
                                 <row id="325">
@@ -2003,17 +2004,6 @@ group by fin.tipofinanca]]></xml-property>
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="349">
-                    <property name="borderTopColor">#000000</property>
-                    <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">thin</property>
-                    <cell id="350">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                    </cell>
-                </row>
-            </footer>
         </table>
     </body>
     <list-property name="images">
