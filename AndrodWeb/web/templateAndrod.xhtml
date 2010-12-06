@@ -25,6 +25,7 @@
                     <ui:insert name="tituloFuncionalidade">AndRod</ui:insert>
                 </div>
                 <div id="tituloDataHora" align="right">
+                    <h:graphicImage id="dataHora" alt="#" url="/imagens/interno/icone_relogio.jpg" />
                     <h:outputText value="Data/Hora: "/>
                     <h:outputText value="#{usuarioMB.dataAtual}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />
@@ -40,10 +41,12 @@
             <h:form rendered="#{not empty sessionScope['usuarioLogado']}">
                 <div id="painelLogout">
                     <h:commandLink action="#{usuarioAutenticaMB.autenticaLogout}">
+                        <h:graphicImage id="logout" alt="#" url="/imagens/interno/icone_logout.png" />
                         <h:outputText value="Logout"/>
                     </h:commandLink>
                 </div>
                 <div id="tituloUltimoAcesso" align="right" >
+                    <h:graphicImage id="excluir" alt="#" url="/imagens/interno/icone_relogio.jpg" />
                     <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="Último acesso: "/>
                     <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="#{usuarioMB.ultimoAcesso}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />

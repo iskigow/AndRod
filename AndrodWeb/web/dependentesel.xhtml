@@ -20,6 +20,8 @@
 
     <ui:define name="content">
 
+        <script type="text/javascript" src="${facesContext.externalContext.requestContextPath}/js/jquery.maskedinput-1.2.1.js"></script>
+
         <f:view>
 
             <h:form id="dependenteselForm">
@@ -30,7 +32,7 @@
 
                 <h:panelGrid>
                     
-                    <h:dataTable value="#{dependenteSelMB.listaDependentes}" var="dependente" border="1" >
+                    <rich:dataTable value="#{dependenteSelMB.listaDependentes}" var="dependente" border="1" >
 
                         <h:column>
                             <f:facet name="header"><h:outputText rendered="true" value="#{bundle.nomeResumido}" /></f:facet>
@@ -69,7 +71,7 @@
 
                         </h:column>
 
-                    </h:dataTable>
+                    </rich:dataTable>
                 </h:panelGrid>
             </h:form>
         </f:view>
