@@ -73,7 +73,7 @@ public class RelatorioMB extends BaseMB {
             Usuario usuario = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
 
             String urlRelatorio =
-                    "/birt/run?__report=rel/usuariofinancaclassificacao.rptdesign&__format=pdf&idusuario=" + usuario.getId();
+                    "/birt/run?__report=rel/usuariofinancaclassificacaorel.rptdesign&__format=pdf&idusuario=" + usuario.getId();
 
             HttpServletRequest httpRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
