@@ -36,7 +36,7 @@
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
             <property name="odaURL">jdbc:postgresql://localhost:5432/androd</property>
-            <property name="odaUser">postgres</property>
+            <property name="odaUser">androd</property>
             <encrypted-property name="odaPassword" encryptionID="base64">MTIz</encrypted-property>
         </oda-data-source>
     </data-sources>
@@ -468,6 +468,124 @@ from financa fin
 	left join classificacao cla on fin.idclassificacaofinanca = cla.id 
 where fin.idusuario = ?
 group by fin.tipofinanca]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="classificacao" id="197">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">descricao</property>
+                    <text-property name="displayName">descricao</text-property>
+                    <text-property name="heading">descricao</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">datacadastro</property>
+                    <text-property name="displayName">datacadastro</text-property>
+                    <text-property name="heading">datacadastro</text-property>
+                    <property name="displayLength">13</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">superior_id</property>
+                    <text-property name="displayName">superior_id</text-property>
+                    <text-property name="heading">superior_id</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">usuario_id</property>
+                    <text-property name="displayName">usuario_id</text-property>
+                    <text-property name="heading">usuario_id</text-property>
+                    <property name="displayLength">20</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">idusuario</property>
+                    <property name="paramName">idusuario</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">descricao</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">datacadastro</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">superior_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">usuario_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">AndRod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">descricao</property>
+                    <property name="nativeName">descricao</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">datacadastro</property>
+                    <property name="nativeName">datacadastro</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">superior_id</property>
+                    <property name="nativeName">superior_id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">usuario_id</property>
+                    <property name="nativeName">usuario_id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select *
+from classificacao cla where cla.usuario_id = ?]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>

@@ -48,4 +48,27 @@ public class GraficoMB extends BaseMB {
         }
     }
 
+    public void usuarioFinancaClassificacaoGrafico() {
+
+        try {
+
+            Usuario usuario = (Usuario)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");
+
+            String urlRelatorio =
+                    "/birt/run?__report=rel/usuariofinancaclassificacaogra.rptdesign&__format=pdf&idusuario=" + usuario.getId();
+
+            HttpServletRequest httpRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+            HttpServletResponse httpResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+            httpResponse.sendRedirect("http://" + httpRequest.getServerName() + ":" + httpRequest.getLocalPort() + urlRelatorio);
+
+        } catch (Exception ex) {
+
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha ao invocar Relatório usuário.", "Falha ao invocar Relatório usuário."));
+        }
+    }
+
 }

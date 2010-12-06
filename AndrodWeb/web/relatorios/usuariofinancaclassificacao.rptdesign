@@ -91,14 +91,6 @@
                     <property name="horizontalAlign">justify</property>
                     <property name="wordWrap">false</property>
                 </structure>
-                <structure>
-                    <property name="columnName">descricaofinanca</property>
-                    <text-property name="displayName">descricaofinanca</text-property>
-                    <text-property name="heading">descricaofinanca</text-property>
-                    <property name="displayLength">255</property>
-                    <property name="horizontalAlign">justify</property>
-                    <property name="wordWrap">false</property>
-                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -106,6 +98,14 @@
                     <property name="paramName">idusuario</property>
                     <property name="dataType">decimal</property>
                     <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">idclassificacao</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -141,11 +141,6 @@
                         <property name="position">6</property>
                         <property name="name">datacadastro</property>
                         <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">descricaofinanca</property>
-                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -187,17 +182,10 @@
                     <property name="nativeName">datacadastro</property>
                     <property name="dataType">date</property>
                 </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">descricaofinanca</property>
-                    <property name="nativeName">descricaofinanca</property>
-                    <property name="dataType">string</property>
-                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select fin.id, fin.datafinanca, fin.valor, fin.descricao, fin.tipofinanca, fin.datacadastro, cla.descricao descricaofinanca
-from financa fin 
-	left join classificacao cla on fin.idclassificacaofinanca = cla.id 
-where fin.idusuario = ?
+            <xml-property name="queryText"><![CDATA[select fin.id, fin.datafinanca, fin.valor, fin.descricao, fin.tipofinanca, fin.datacadastro
+from financa fin
+where fin.idusuario = ? and fin.idclassificacaofinanca = ?
 order by fin.datafinanca]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="usuario" id="196">
@@ -405,6 +393,124 @@ order by fin.datafinanca]]></xml-property>
             <xml-property name="queryText"><![CDATA[select *
 from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="classificacao" id="197">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">descricao</property>
+                    <text-property name="displayName">descricao</text-property>
+                    <text-property name="heading">descricao</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">datacadastro</property>
+                    <text-property name="displayName">datacadastro</text-property>
+                    <text-property name="heading">datacadastro</text-property>
+                    <property name="displayLength">13</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">superior_id</property>
+                    <text-property name="displayName">superior_id</text-property>
+                    <text-property name="heading">superior_id</text-property>
+                    <property name="displayLength">255</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">usuario_id</property>
+                    <text-property name="displayName">usuario_id</text-property>
+                    <text-property name="heading">usuario_id</text-property>
+                    <property name="displayLength">20</property>
+                    <property name="horizontalAlign">justify</property>
+                    <property name="wordWrap">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">idusuario</property>
+                    <property name="paramName">idusuario</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">descricao</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">datacadastro</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">superior_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">usuario_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">AndRod</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">descricao</property>
+                    <property name="nativeName">descricao</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">datacadastro</property>
+                    <property name="nativeName">datacadastro</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">superior_id</property>
+                    <property name="nativeName">superior_id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">usuario_id</property>
+                    <property name="nativeName">usuario_id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select *
+from classificacao cla where cla.usuario_id = ?]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -443,11 +549,7 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="orientation">landscape</property>
-            <property name="topMargin">0.25in</property>
-            <property name="leftMargin">0.25in</property>
-            <property name="bottomMargin">0in</property>
             <property name="headerHeight">1.3in</property>
-            <property name="footerHeight">0in</property>
             <page-header>
                 <grid id="10">
                     <column id="11"/>
@@ -462,57 +564,13 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                             </image>
                         </cell>
                     </row>
-                    <row id="14">
-                        <cell id="15">
-                            <grid id="182">
-                                <property name="marginLeft">625pt</property>
-                                <property name="textAlign">left</property>
-                                <property name="width">1.625in</property>
-                                <column id="194">
-                                    <property name="width">0.4375in</property>
-                                </column>
-                                <column id="183">
-                                    <property name="width">0.21875in</property>
-                                </column>
-                                <column id="184">
-                                    <property name="width">0.11458333333333333in</property>
-                                </column>
-                                <column id="185">
-                                    <property name="width">0.8541666666666666in</property>
-                                </column>
-                                <row id="186">
-                                    <cell id="193">
-                                        <label id="195">
-                                            <text-property name="text">Folha:</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="187">
-                                        <auto-text id="188">
-                                            <property name="type">page-number</property>
-                                        </auto-text>
-                                    </cell>
-                                    <cell id="189">
-                                        <text id="190">
-                                            <property name="contentType">plain</property>
-                                            <text-property name="content"><![CDATA[/]]></text-property>
-                                        </text>
-                                    </cell>
-                                    <cell id="191">
-                                        <auto-text id="192">
-                                            <property name="type">total-page</property>
-                                        </auto-text>
-                                    </cell>
-                                </row>
-                            </grid>
-                        </cell>
-                    </row>
                     <row id="16">
                         <cell id="17">
                             <label id="19">
                                 <property name="fontFamily">"Arial"</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="textAlign">center</property>
-                                <text-property name="text">Detalhamento das Finanças do Usuário</text-property>
+                                <text-property name="text">Gráfico Finanças: Receitas X Despesas</text-property>
                             </label>
                         </cell>
                     </row>
@@ -580,6 +638,7 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
+            <property name="pageBreakInterval">0</property>
             <column id="51"/>
             <column id="52"/>
             <column id="57"/>
@@ -606,13 +665,13 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                                 <property name="width">1.25in</property>
                             </column>
                             <column id="75">
-                                <property name="width">5.958333333333333in</property>
+                                <property name="width">5.927083333333333in</property>
                             </column>
                             <column id="76">
-                                <property name="width">0.6458333333333334in</property>
+                                <property name="width">0.6041666666666666in</property>
                             </column>
                             <column id="77">
-                                <property name="width">2.4791666666666665in</property>
+                                <property name="width">2.4375in</property>
                             </column>
                             <row id="78">
                                 <cell id="79">
@@ -690,39 +749,30 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                     <cell id="122"/>
                     <cell id="123"/>
                 </row>
+                <row id="385">
+                    <property name="textAlign">center</property>
+                    <cell id="386">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
             </header>
             <detail>
                 <row id="32">
                     <cell id="37">
                         <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
-                        <table id="255">
-                            <property name="marginLeft">15pt</property>
-                            <property name="dataSet">financa</property>
+                        <table id="409">
+                            <property name="dataSet">classificacao</property>
                             <list-property name="boundDataColumns">
                                 <structure>
                                     <property name="name">id</property>
                                     <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">datafinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["datafinanca"]</expression>
-                                    <property name="dataType">date</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">valor</property>
-                                    <expression name="expression" type="javascript">dataSetRow["valor"]</expression>
-                                    <property name="dataType">decimal</property>
+                                    <property name="dataType">string</property>
                                 </structure>
                                 <structure>
                                     <property name="name">descricao</property>
                                     <expression name="expression" type="javascript">dataSetRow["descricao"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">tipofinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
                                     <property name="dataType">string</property>
                                 </structure>
                                 <structure>
@@ -731,12 +781,17 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                                     <property name="dataType">date</property>
                                 </structure>
                                 <structure>
-                                    <property name="name">descricaofinanca</property>
-                                    <expression name="expression" type="javascript">dataSetRow["descricaofinanca"]</expression>
+                                    <property name="name">superior_id</property>
+                                    <expression name="expression" type="javascript">dataSetRow["superior_id"]</expression>
                                     <property name="dataType">string</property>
                                 </structure>
                                 <structure>
-                                    <property name="name">totalfinancas</property>
+                                    <property name="name">usuario_id</property>
+                                    <expression name="expression" type="javascript">dataSetRow["usuario_id"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">totalClassificacoes</property>
                                     <property name="dataType">integer</property>
                                     <property name="aggregateFunction">COUNT</property>
                                     <list-property name="arguments">
@@ -746,271 +801,417 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
                                         </structure>
                                     </list-property>
                                 </structure>
-                                <structure>
-                                    <property name="name">totaldespesas</property>
-                                    <property name="dataType">float</property>
-                                    <property name="aggregateFunction">SUM</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["valor"]</expression>
-                                        </structure>
-                                    </list-property>
-                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'DEBITO'</expression>
-                                </structure>
-                                <structure>
-                                    <property name="name">totalreceitas</property>
-                                    <property name="dataType">float</property>
-                                    <property name="aggregateFunction">SUM</property>
-                                    <list-property name="arguments">
-                                        <structure>
-                                            <property name="name">Expression</property>
-                                            <expression name="value" type="javascript">row["valor"]</expression>
-                                        </structure>
-                                    </list-property>
-                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'CREDITO'</expression>
-                                </structure>
                             </list-property>
-                            <column id="262"/>
+                            <property name="pageBreakInterval">0</property>
+                            <column id="416"/>
                             <header>
-                                <row id="391">
-                                    <property name="fontWeight">bold</property>
-                                    <cell id="392">
-                                        <label id="128">
-                                            <property name="fontSize">11pt</property>
+                                <row id="410">
+                                    <cell id="411">
+                                        <label id="344">
+                                            <property name="fontSize">14pt</property>
                                             <property name="fontWeight">bold</property>
-                                            <property name="marginLeft">auto</property>
-                                            <text-property name="text">Finanças:</text-property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">Finanças por Classificação</text-property>
                                         </label>
                                     </cell>
                                 </row>
-                                <row id="284">
-                                    <property name="fontWeight">bold</property>
-                                    <cell id="285">
-                                        <grid id="286">
-                                            <property name="width">10.09375in</property>
-                                            <column id="287">
-                                                <property name="width">0.90625in</property>
-                                            </column>
-                                            <column id="288">
-                                                <property name="width">3.1354166666666665in</property>
-                                            </column>
-                                            <column id="309">
-                                                <property name="width">0.948in</property>
-                                            </column>
-                                            <column id="289">
-                                                <property name="width">2.9895833333333335in</property>
-                                            </column>
-                                            <column id="290">
-                                                <property name="width">1in</property>
-                                            </column>
-                                            <column id="291">
-                                                <property name="width">1.1145833333333333in</property>
-                                            </column>
-                                            <row id="292">
-                                                <cell id="293">
-                                                    <label id="303">
-                                                        <text-property name="text">Data Finança</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="295">
-                                                    <label id="304">
-                                                        <text-property name="text">Finança</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="308">
-                                                    <label id="310">
-                                                        <text-property name="text">Valor</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="297">
-                                                    <label id="305">
-                                                        <text-property name="text">Classificação Finança</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="299">
-                                                    <label id="306">
-                                                        <text-property name="text">Tipo Finança</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="301">
-                                                    <label id="307">
-                                                        <property name="fontWeight">normal</property>
-                                                        <property name="color">#C0C0C0</property>
-                                                        <text-property name="text">Data Cadastro</text-property>
-                                                    </label>
-                                                </cell>
-                                            </row>
-                                        </grid>
-                                    </cell>
-                                </row>
                             </header>
+                            <group id="417">
+                                <property name="groupName">classificacao</property>
+                                <property name="interval">none</property>
+                                <property name="sortDirection">asc</property>
+                                <expression name="keyExpr" type="javascript">row["id"]</expression>
+                                <structure name="toc"/>
+                                <property name="repeatHeader">true</property>
+                                <property name="hideDetail">false</property>
+                                <property name="pageBreakAfter">always</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <header>
+                                    <row id="418">
+                                        <cell id="419">
+                                            <grid id="423">
+                                                <property name="width">10.302083333333334in</property>
+                                                <column id="424">
+                                                    <property name="width">1.21875in</property>
+                                                </column>
+                                                <column id="425">
+                                                    <property name="width">9.083333333333334in</property>
+                                                </column>
+                                                <row id="426">
+                                                    <cell id="427">
+                                                        <label id="429">
+                                                            <property name="fontSize">11pt</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <text-property name="text">Classificação:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="428">
+                                                        <data id="430">
+                                                            <property name="whiteSpace">nowrap</property>
+                                                            <property name="resultSetColumn">descricao</property>
+                                                        </data>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </header>
+                            </group>
                             <detail>
-                                <row id="258">
-                                    <cell id="259">
-                                        <grid id="263">
-                                            <property name="width">10.09375in</property>
-                                            <column id="264">
-                                                <property name="width">0.90625in</property>
-                                            </column>
-                                            <column id="265">
-                                                <property name="width">3.135in</property>
-                                            </column>
-                                            <column id="312">
-                                                <property name="width">0.9479166666666666in</property>
-                                            </column>
-                                            <column id="266">
-                                                <property name="width">2.9895833333333335in</property>
-                                            </column>
-                                            <column id="267">
-                                                <property name="width">1in</property>
-                                            </column>
-                                            <column id="268">
-                                                <property name="width">1.125in</property>
-                                            </column>
-                                            <row id="269">
-                                                <cell id="270">
-                                                    <data id="279">
-                                                        <structure name="dateTimeFormat">
-                                                            <property name="category">Custom</property>
-                                                            <property name="pattern">dd/MM/yyyy</property>
+                                <row id="412">
+                                    <cell id="413">
+                                        <table id="255">
+                                            <property name="marginLeft">15pt</property>
+                                            <property name="dataSet">financa</property>
+                                            <list-property name="paramBindings">
+                                                <structure>
+                                                    <property name="paramName">idclassificacao</property>
+                                                    <expression name="expression" type="javascript">row["id"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">id</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                                    <property name="dataType">decimal</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">datafinanca</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["datafinanca"]</expression>
+                                                    <property name="dataType">date</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">valor</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["valor"]</expression>
+                                                    <property name="dataType">decimal</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">descricao</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["descricao"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">tipofinanca</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["tipofinanca"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">datacadastro</property>
+                                                    <expression name="expression" type="javascript">dataSetRow["datacadastro"]</expression>
+                                                    <property name="dataType">date</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">totalfinancas</property>
+                                                    <property name="dataType">integer</property>
+                                                    <property name="aggregateFunction">COUNT</property>
+                                                    <list-property name="arguments">
+                                                        <structure>
+                                                            <property name="name">Expression</property>
+                                                            <expression name="value" type="javascript">row["id"]</expression>
                                                         </structure>
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <property name="resultSetColumn">datafinanca</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="271">
-                                                    <data id="280">
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <property name="resultSetColumn">descricao</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="311">
-                                                    <data id="313">
-                                                        <structure name="numberFormat">
-                                                            <property name="category">Custom</property>
-                                                            <property name="pattern">¤###,##0.00</property>
-                                                            <property name="locale">pt_BR</property>
+                                                    </list-property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">porcentagemfinancas</property>
+                                                    <property name="dataType">float</property>
+                                                    <property name="aggregateFunction">PERCENTILE</property>
+                                                    <list-property name="arguments">
+                                                        <structure>
+                                                            <property name="name">Expression</property>
+                                                            <expression name="value" type="javascript">row["valor"]</expression>
                                                         </structure>
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <list-property name="highlightRules">
-                                                            <structure>
-                                                                <property name="operator">eq</property>
-                                                                <property name="fontWeight">bold</property>
-                                                                <property name="color">#2222FF</property>
-                                                                <expression name="testExpr" type="javascript">row["tipofinanca"]</expression>
-                                                                <simple-property-list name="value1">
-                                                                    <value type="javascript">'CREDITO'</value>
-                                                                </simple-property-list>
-                                                            </structure>
-                                                            <structure>
-                                                                <property name="operator">eq</property>
-                                                                <property name="fontWeight">bold</property>
-                                                                <property name="color">#FF2D2D</property>
-                                                                <expression name="testExpr" type="javascript">row["tipofinanca"]</expression>
-                                                                <simple-property-list name="value1">
-                                                                    <value type="javascript">'DEBITO'</value>
-                                                                </simple-property-list>
-                                                            </structure>
-                                                        </list-property>
-                                                        <property name="resultSetColumn">valor</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="272">
-                                                    <data id="281">
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <property name="resultSetColumn">descricaofinanca</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="273">
-                                                    <data id="282">
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <property name="resultSetColumn">tipofinanca</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="274">
-                                                    <data id="283">
-                                                        <property name="color">#C0C0C0</property>
-                                                        <structure name="dateTimeFormat">
-                                                            <property name="category">Custom</property>
-                                                            <property name="pattern">dd/MM/yyyy</property>
+                                                        <structure>
+                                                            <property name="name">percentage</property>
+                                                            <expression name="value" type="javascript">dataSetRow["tipofinanca"]</expression>
                                                         </structure>
-                                                        <property name="whiteSpace">nowrap</property>
-                                                        <property name="resultSetColumn">datacadastro</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                        </grid>
+                                                    </list-property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">totaldespesas</property>
+                                                    <property name="dataType">float</property>
+                                                    <property name="aggregateFunction">SUM</property>
+                                                    <list-property name="arguments">
+                                                        <structure>
+                                                            <property name="name">Expression</property>
+                                                            <expression name="value" type="javascript">row["valor"]</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'DEBITO'</expression>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">totalreceitas</property>
+                                                    <property name="dataType">float</property>
+                                                    <property name="aggregateFunction">SUM</property>
+                                                    <list-property name="arguments">
+                                                        <structure>
+                                                            <property name="name">Expression</property>
+                                                            <expression name="value" type="javascript">row["valor"]</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <expression name="filterExpr" type="javascript">dataSetRow["tipofinanca"] == 'CREDITO'</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="pageBreakInterval">0</property>
+                                            <column id="262"/>
+                                            <header>
+                                                <row id="405">
+                                                    <property name="fontWeight">bold</property>
+                                                    <cell id="406">
+                                                        <label id="128">
+                                                            <property name="fontSize">11pt</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="marginLeft">0pt</property>
+                                                            <text-property name="text">Finanças:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                                <row id="284">
+                                                    <property name="fontWeight">bold</property>
+                                                    <cell id="285">
+                                                        <grid id="286">
+                                                            <property name="marginLeft">10pt</property>
+                                                            <property name="width">100%</property>
+                                                            <column id="287">
+                                                                <property name="width">0.90625in</property>
+                                                            </column>
+                                                            <column id="288">
+                                                                <property name="width">3.1354166666666665in</property>
+                                                            </column>
+                                                            <column id="309">
+                                                                <property name="width">0.948in</property>
+                                                            </column>
+                                                            <column id="290">
+                                                                <property name="width">1in</property>
+                                                            </column>
+                                                            <column id="291">
+                                                                <property name="width">1.125in</property>
+                                                            </column>
+                                                            <row id="292">
+                                                                <cell id="293">
+                                                                    <label id="303">
+                                                                        <text-property name="text">Data Finança</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="295">
+                                                                    <label id="304">
+                                                                        <text-property name="text">Finança</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="308">
+                                                                    <label id="310">
+                                                                        <text-property name="text">Valor</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="299">
+                                                                    <label id="306">
+                                                                        <text-property name="text">Tipo Finança</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="301">
+                                                                    <label id="307">
+                                                                        <property name="fontWeight">normal</property>
+                                                                        <property name="color">#C0C0C0</property>
+                                                                        <text-property name="text">Data Cadastro</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </header>
+                                            <detail>
+                                                <row id="258">
+                                                    <cell id="259">
+                                                        <grid id="263">
+                                                            <property name="marginLeft">10pt</property>
+                                                            <property name="width">100%</property>
+                                                            <column id="264">
+                                                                <property name="width">0.90625in</property>
+                                                            </column>
+                                                            <column id="265">
+                                                                <property name="width">3.135in</property>
+                                                            </column>
+                                                            <column id="312">
+                                                                <property name="width">0.9479166666666666in</property>
+                                                            </column>
+                                                            <column id="267">
+                                                                <property name="width">1in</property>
+                                                            </column>
+                                                            <column id="268">
+                                                                <property name="width">1.125in</property>
+                                                            </column>
+                                                            <row id="269">
+                                                                <cell id="270">
+                                                                    <data id="279">
+                                                                        <structure name="dateTimeFormat">
+                                                                            <property name="category">Custom</property>
+                                                                            <property name="pattern">dd/MM/yyyy</property>
+                                                                        </structure>
+                                                                        <property name="whiteSpace">nowrap</property>
+                                                                        <property name="resultSetColumn">datafinanca</property>
+                                                                    </data>
+                                                                </cell>
+                                                                <cell id="271">
+                                                                    <data id="280">
+                                                                        <property name="whiteSpace">nowrap</property>
+                                                                        <property name="resultSetColumn">descricao</property>
+                                                                    </data>
+                                                                </cell>
+                                                                <cell id="311">
+                                                                    <data id="313">
+                                                                        <structure name="numberFormat">
+                                                                            <property name="category">Custom</property>
+                                                                            <property name="pattern">¤ ###,##0.00</property>
+                                                                            <property name="locale">pt_BR</property>
+                                                                        </structure>
+                                                                        <property name="whiteSpace">nowrap</property>
+                                                                        <list-property name="highlightRules">
+                                                                            <structure>
+                                                                                <property name="operator">eq</property>
+                                                                                <property name="fontWeight">bold</property>
+                                                                                <property name="color">#2222FF</property>
+                                                                                <expression name="testExpr" type="javascript">row["tipofinanca"]</expression>
+                                                                                <simple-property-list name="value1">
+                                                                                    <value type="javascript">'CREDITO'</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="operator">eq</property>
+                                                                                <property name="fontWeight">bold</property>
+                                                                                <property name="color">#FF2D2D</property>
+                                                                                <expression name="testExpr" type="javascript">row["tipofinanca"]</expression>
+                                                                                <simple-property-list name="value1">
+                                                                                    <value type="javascript">'DEBITO'</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">valor</property>
+                                                                    </data>
+                                                                </cell>
+                                                                <cell id="273">
+                                                                    <data id="282">
+                                                                        <property name="whiteSpace">nowrap</property>
+                                                                        <property name="resultSetColumn">tipofinanca</property>
+                                                                    </data>
+                                                                </cell>
+                                                                <cell id="274">
+                                                                    <data id="283">
+                                                                        <property name="color">#C0C0C0</property>
+                                                                        <structure name="dateTimeFormat">
+                                                                            <property name="category">Custom</property>
+                                                                            <property name="pattern">dd/MM/yyyy</property>
+                                                                        </structure>
+                                                                        <property name="whiteSpace">nowrap</property>
+                                                                        <property name="resultSetColumn">datacadastro</property>
+                                                                    </data>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </detail>
+                                            <footer>
+                                                <row id="325">
+                                                    <cell id="326">
+                                                        <grid id="328">
+                                                            <property name="marginLeft">10pt</property>
+                                                            <property name="width">100%</property>
+                                                            <column id="329">
+                                                                <property name="width">1.6979166666666667in</property>
+                                                            </column>
+                                                            <column id="330">
+                                                                <property name="width">5.947916666666667in</property>
+                                                            </column>
+                                                            <row id="372">
+                                                                <cell id="373">
+                                                                    <label id="377">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <text-property name="text">Total Valor Despesas:</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="374">
+                                                                    <data id="375">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <property name="color">#FF2D2D</property>
+                                                                        <structure name="numberFormat">
+                                                                            <property name="category">Custom</property>
+                                                                            <property name="pattern">¤ ###,##0.00</property>
+                                                                            <property name="locale">pt_BR</property>
+                                                                        </structure>
+                                                                        <property name="resultSetColumn">totaldespesas</property>
+                                                                    </data>
+                                                                </cell>
+                                                            </row>
+                                                            <row id="369">
+                                                                <cell id="370">
+                                                                    <label id="380">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <text-property name="text">Total Valor Receitas:</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="371">
+                                                                    <data id="376">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <property name="color">#2222FF</property>
+                                                                        <structure name="numberFormat">
+                                                                            <property name="category">Custom</property>
+                                                                            <property name="pattern">¤ ###,##0.00</property>
+                                                                            <property name="locale">pt_BR</property>
+                                                                        </structure>
+                                                                        <property name="resultSetColumn">totalreceitas</property>
+                                                                    </data>
+                                                                </cell>
+                                                            </row>
+                                                            <row id="331">
+                                                                <cell id="332">
+                                                                    <label id="334">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <text-property name="text">Quantidade de Finanças:</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="333">
+                                                                    <data id="327">
+                                                                        <property name="fontWeight">bold</property>
+                                                                        <structure name="numberFormat">
+                                                                            <property name="category">Fixed</property>
+                                                                            <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            <property name="locale">pt_BR</property>
+                                                                        </structure>
+                                                                        <property name="resultSetColumn">totalfinancas</property>
+                                                                    </data>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </footer>
+                                        </table>
                                     </cell>
                                 </row>
                             </detail>
                             <footer>
-                                <row id="325">
-                                    <cell id="326">
-                                        <grid id="328">
-                                            <property name="width">10.09375in</property>
-                                            <column id="329">
-                                                <property name="width">1.6979166666666667in</property>
+                                <row id="450">
+                                    <cell id="451">
+                                        <grid id="431">
+                                            <property name="width">10.302083333333334in</property>
+                                            <column id="432">
+                                                <property name="width">2.1458333333333335in</property>
                                             </column>
-                                            <column id="330">
-                                                <property name="width">8.395833333333334in</property>
+                                            <column id="433">
+                                                <property name="width">8.15625in</property>
                                             </column>
-                                            <row id="335">
-                                                <cell id="336">
-                                                    <label id="377">
+                                            <row id="444">
+                                                <cell id="445">
+                                                    <label id="446">
                                                         <property name="fontWeight">bold</property>
-                                                        <text-property name="text">Total Valor Despesas:</text-property>
+                                                        <text-property name="text">Quantidade de classificações:</text-property>
                                                     </label>
                                                 </cell>
-                                                <cell id="337">
-                                                    <data id="381">
+                                                <cell id="447">
+                                                    <data id="449">
                                                         <property name="fontWeight">bold</property>
-                                                        <property name="color">#FF2D2D</property>
-                                                        <structure name="numberFormat">
-                                                            <property name="category">Custom</property>
-                                                            <property name="pattern">¤ ###,##0.00</property>
-                                                            <property name="locale">pt_BR</property>
-                                                        </structure>
-                                                        <property name="resultSetColumn">totaldespesas</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                            <row id="338">
-                                                <cell id="339">
-                                                    <label id="380">
-                                                        <property name="fontWeight">bold</property>
-                                                        <text-property name="text">Total Valor Receitas:</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="340">
-                                                    <data id="382">
-                                                        <property name="fontWeight">bold</property>
-                                                        <property name="color">#2222FF</property>
-                                                        <structure name="numberFormat">
-                                                            <property name="category">Custom</property>
-                                                            <property name="pattern">¤ ###,##0.00</property>
-                                                            <property name="locale">pt_BR</property>
-                                                        </structure>
-                                                        <property name="resultSetColumn">totalreceitas</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                            <row id="331">
-                                                <cell id="332">
-                                                    <label id="334">
-                                                        <property name="fontWeight">bold</property>
-                                                        <text-property name="text">Quantidade de Finanças:</text-property>
-                                                    </label>
-                                                </cell>
-                                                <cell id="333">
-                                                    <data id="327">
-                                                        <property name="fontWeight">bold</property>
-                                                        <structure name="numberFormat">
-                                                            <property name="category">Fixed</property>
-                                                            <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                                            <property name="locale">pt_BR</property>
-                                                        </structure>
-                                                        <property name="resultSetColumn">totalfinancas</property>
+                                                        <property name="resultSetColumn">totalClassificacoes</property>
                                                     </data>
                                                 </cell>
                                             </row>
@@ -1025,141 +1226,6 @@ from usuario usu inner join pessoa pes on usu.id = pes.id where usu.id = ?]]></x
         </table>
     </body>
     <list-property name="images">
-        <structure>
-            <property name="name">cabecalho rel androd.jpg</property>
-            <property name="data">
-                /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
-                JC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIy
-                MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAzAnMDASIAAhEBAxEB/8QA
-                HwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIh
-                MUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVW
-                V1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXG
-                x8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQF
-                BgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
-                YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOE
-                hYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq
-                8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigArA8bazP4f8G6pqdq8SXUMJ8gy/d3nheO/JrfrgdZuI
-                vHXiWPw5aZl0jTZln1SdeUeRTlIAe5zycdMUAQ6Fd654Z13RtN1vV5NUttagLLNMgDwXCqGKDHVSDx9K
-                9ErhtaePWPip4e02Ml/7Kgmv7jA4UsAkYJz1zk4ruaACiiigAooooAKKKKACis+21zTLzV7vSre9hkv7
-                MK1xAp+aMN0zVmC8tbokW9zDNjr5bhsflQBPRRRQAUUVn3muaZp+pWWn3d7FDeXxK20Ln5pSOuKANCii
-                igAooooAKKKKACimSzRQRNLNIkca9WdgAPxNP6jIoAKKKKACiiigAooooAKKKKACiiigAorPbXNMXXE0
-                Rr2Iam8PnrbZ+cpnGa0KACiiigAooooAKKKKACiiigAooooAKKiubiG0tZbm4kWOGFDJI7dFUDJJ/Cq2
-                kaxp+vaZFqWl3SXNnLnZKmcHBwevPUUAXqKKKACiisDV/HHhjQdQSw1TWrS2u3xiFmywz0yB0/HFAG/R
-                UfnxecIfNTzSu8JuG4r649KkoAKKKKACiiigAooooAKKKZHNFKXEciOUba+1gdp9D6GgB9FFFABRRRQA
-                UUUUAFFFFABRRRQAUUUUAFFFZlz4g0m01210S4voo9Su0LwW5zudRnJHbsfyoA06KKKAI5p4reJpZ5Ui
-                jX7zuwUD6k1Bb6np91J5dvfW00h/hjmVj+QNcn8VLOK68JwS3MYls7XULee5iY4DxB9rA+3zU3xR4I8L
-                2vhbVLm30a0tJ4LWWSKe3i2PGwQ4IIwaANPxvrN1pukxWOlsP7Z1OT7LZD+6x+9IfZRk5+laHhvQLXwz
-                oVtpdoMrGMySEfNLIfvOfcnmuB+FOj3E9zPq+s6rc6pqFrFDDbvM5ZIY5YY5flB6EhwCfavVKAPP5dE8
-                XaL4t1vVdEg0u/j1QxMHvZWR4di42cDlfxqLUtV+J+k6ZPfyaf4buY7eMyyRwtNvKgZOMnGcfyr0Wq+o
-                S+Rpt1MGCmOF2yegwCaAM3wn4hh8VeGLDWYVCC5jDNGG3bG6Fc/Wth3WNGd2CooyzE4AHrXAfBaGOP4b
-                Wkyb99zNLPIWXALFuce3ArK+Nfia+tdOsPCujMDqWuP5LKAdwiJA4PbJOPpmgDgdb+JOpax8UdI1q0km
-                i8N2WorZwsrYSXJAkY+uVOfYYr2rxj490vwTcaTHqaS+XqMxiEq42wgYyzZ7fMOnvXhviv4deN9C+G6p
-                f3Ok/wBk6VILhbezDGXex2lyxQZ+9k89vatr4k3EXji2+GcXmfu9UbErjsWMSuPqDuo8kHmei+Evi74b
-                8Y6/Jo+nreRXAVnia4jCrMB124JPvggcVH4s+MfhjwlqzaXMLy+vI/8AWx2casIu+GLMBnHYZrm9ftLb
-                Rvj14ItbSGO2tI7B4YkRcAcSgD9RVb4Mapo2nXHidNZurW115tQkac3TqjtH7Fuo3bs/hRuBj+EtWh1/
-                Xfihr9i8nkTaa7RMw2sAUbGfQjbVXwJ8IoPEngGy8RaZrF7puulpCkiuPLyrkDoAw6dQfwq34KuLKd/i
-                5Np7RNaSQTPAYhhSmJsEe3SuKsdF+IR+HVtqGlXl9P4dfzN9rZXDBowHYNuQckEgnjI55o/4AHufwi8a
-                ah4l0C/ttcdGv9Im8ia4BGJFwcMT0z8pyfoaefjd4H/toaaNRlOX8v7UIT5IPT73XHvjHviuJ0m/8Nj4
-                C+IYPBpnjvUt918k7D7RkkBmOOq7d2COPxzWbqY8H2/7OVulu1g2pzJGRjaZzcbwXz/FwNw+lDBHsXjL
-                4haB4GtoZNVmkeWfJht7dQ8jj1wSAB7k15LN41074hfGPwXPpsV1CtqziWK5QKysMt2JGMAd6doM9vpn
-                xi0Z/F0kcLLoFslpJdHCrL5a9zwDnzBk9609Y1HSr/8AaU8NyadcWs+y1ZJ3gYMPM2S4BI6nBWhboOh7
-                fRRXO+L7TxVeadEnhPU7KwuxJmR7qLeGXHQcHH5UAdFRXC+FNJ+I9prIm8T+I9MvtP2EGC3twrFscEEI
-                uP1ruqAOM+KPi+48FeCp9Ts4le7kkW3gLDKozZ+Yj2AP44rzPR/Ar+Jra31S8+K7trFyokAtroN5RIzt
-                A3g8egAx6V6h4y8UeFdPvbHw54mjV4tWBC+dGDCMED52J45xg9uvFef+M/AXwl0nQry7NxFZXBiYwC3v
-                mkZnx8u1CzZ5x2x9KW2oeR1Pj+00bTPhfDp/jLUtSvbdXiie7t1UTyyAkhsHI7Hrn8TWrrnjTw38O/Dm
-                mLeTXDQtCsdpDGu+WRVUc847YySR1rw/WdS1XUf2dNLfU3kk26wIoZJCSzxBHxyeuDkfhXq3j/wrYeI4
-                tDa28RW2j+IbBBLYNLKoLjj+HOcZUcgHvwabAXSvjXoOrW2qSxaXq8b6fa/amikgXdIm4L8uGPOSOuOK
-                840n43x2nxE1jV7gavcaNdwqlvY5UmJht52lto6P065rvPhx4z1HUvF+oeG/ElpYSa7ZW+TqVntYTRgj
-                5WI/3geMDrwDVLRf3X7T2vqOkmmqf/HYT/SjqHQ7XxB8R/DvhjRbHUtUnmi+3RrLBbCPMzAgHle2M85O
-                KZ4P+JnhvxvPNb6VPMl1EnmNBcR7H25xkckHqOhryP4gXOs/8L5K2R09LpbWNLGbUmVYoQVyXG7gnJfH
-                B57cV23gXQdG0Dxa9xq3i2HW/F9/Ay4WQEIg+ZgoH0744HAFHS4Cj4/eE47Pz7mK9SQ3LwCGNFdtq4/e
-                HkYU56deD1xWxpHxi8I654nj0Gxubhp5WKRTNDtikb0BJz9MjBrxfw34b0+5+EHjfWmt1fUEnMKSMM+W
-                isjnb6E55PsK39ft7HS/B/ws1uxtYbfyrmFpTGgXczBGYkjqSUNCBnr/AIu8f+HvBEUR1i7KzSjMdvCu
-                +Rh647D3OKb4P+IXh/xwsw0i4l8+ABpbeePY6g9+4I+hNecaAmn3/wC0P4ll8QNC09pGPsKXJG1QNoBU
-                HjIU5/EmrnwsuLaT4seP/LuIpjLOJI3RwwZN7ZwR1AyBQgZ7JXFeM/il4d8EXUdnfNcXN9Iu4W1ogZ1B
-                6FskAZ+ufau1rxTwdf6Xp/xu8Ztr89vb6i8gFlJcsF/d88KTxnbs/CjqBS8I+JbLxt+0ANa05Zltl0sg
-                JMu10IAUggEjq3Ymuz1v42+DdD1eXTZbi5uZYm2Svaw70Ru4ySM49s1wtpqNtP8AGzxpd6BLDMf7FmMD
-                22CGmCR5wR1O4Hn1rmPh5pmta/4cm0+DxDpWgaOZGN9P5qfap/XdzuAxxyVH1o3A+l9F1rT/ABDpFvqm
-                l3AuLOdco4BHfBBB5BB4xV+uX+H8Hh2y8JwWHhi+S9sLR2iadW3FpM5Yk+pznjjnitnXJ7i20DUZ7RS1
-                zFayPEAMkuFJH60PQEcV4h+NPhPw5rsmk3DXlzNC22eS1iDpEfQksMkd8A1vX3j/AMNaf4Wg8ST6kg02
-                4H7h1UlpTz8qrjOeD9Mc1wPwTm8N2vw7ur29vbL7XczSNqTXUi5ABwA27+HHPPqayfG8/h/UfiJ4CQyW
-                f/CItGxh8sBbfcHIIwMADIQGjyDzPTPCHxJ8OeN5p4NJuJRcwLvaCePY5XpuHUEfjXKyftA+FIbJppLb
-                UDOLh4fsyIpfauPnOWAAOfXPBrLmfTZP2idMfw79mMdvpsn242gGwfK/B28Z5T9Kw/hP4etZfh94x8RP
-                Ckl/LFc20TMuTGoi3HHpkt+lK/UDsPH/AMW9LsvB8R09dRL6zYSPZ3cCBRCxyo3EkEMD1xnGKzfhd8Xr
-                S60W00XVU1Ka+tLSaWe9dQ6FY9zcnO77oAyR1qx4EZbn9m28j3Z2WN8h9jmQ/wBRTvADl/2cLsf3bK+H
-                /ow/1pvS4b2NG6+Pngi2treZZb6dpl3GKKAbouSPmyQAeOgJ4rpNf+I3hrw3o1lqmoXxEV9GsttHGhaS
-                VSAchewwRycVwfwr8C6Dr3wcEN3a7ZNUZ/tNxHgSnZKdoDEHAG0cdOtZ0unaPZfH+y0zWjEul2GlRxaa
-                l2w8s7UAXOeCc7z9RR1sHmdzJ440Lxv8OvElxo1w7mGwnWWKVNjx5jbGR6H1FUfgze22nfBuzvLydILa
-                Fp3klc4VVEjZJri4DZz/ABB+JU+hGI6UNDmWRrfHlGXy16Y46h/1rJu5bqP9lywW33eXJqBWfb/c8xzz
-                7bgtF+voB6Xb/HnwPcaktp9pvI0Z9ouZLciLr165A+or0sEMoZSCCMgjvXzvpvh7+39Bsb3xp4s0nTPD
-                VsqtBpWnzptIGMBiDy3r95vpX0FZTW1xYW89m6vayRq0LJ0KEcEe2MUwMzxR4q0rwfpH9p6xM8dv5gjX
-                YhcsxzgAD6H8q+dvBPiXwTc+KtV1LxbZTajqOo6hm0LQeakaluCQT7gdDgCvpy7tLa9gMN1bxTxddkqB
-                lyOnBryb9n+KJ/DesuY0Z11WTaxUEj5F6GktwexueV4Uufjfv36gPElpYZ2gj7OUIx9d2G+n41lyftA+
-                FIbJppLbUDOLh4fsyIpfauPnOWAAOfXPBqlpjY/aZ8QO4/1elgr/AN8Rf/XrnPhP4etZfh94x8RPCkl/
-                LFc20TMuTGoi3HHpkt+lK+lwPcLTxTo934Wj8SC8SLSnh87zpfl2r0wffPGPWuQ0744+CdS1ePT0urqI
-                yPsjnmgKxsScDnOR+IFeQ6ldPJ8CPB9q8zJp76pLHdlewDsQD+BJ/Cuy+Kn9hWF74AttNmsksba/U+TA
-                64Ee6PDEDtgHmq6i6HaeIfi94e8MeI9Q0bU47pJLOBJt6KGErNjCIM9cMDzgcH0rX8E+PdI8d6bPeaYJ
-                4jbvsmhuFCuhIyDwSMHnv2rzWHQ7TxH+0zqrX0Syw6dbxzrG4yGcJGFyPYtn8BWQl9d6fcfGP7GWW53B
-                lCdQhkcMw+itmpvoPqd7efHbwXZ61JpzS3skcb7HvIoA0IP1zuI68gfSui8TfETw34U0y1v9RvdyXih7
-                aOBd7yqRncB6YI5OK5n4ey+C9L+EdgLu70s2csIkvRcshDSn7wZT1IPAGOwrz3xpfajN8bIX0V9LGbGE
-                aZPfOq28UZQESJu+UnJbHB+nFPrYPM9i8H/Ezw343nlttKnmS6iTzGt7iPY+3OMjkg9R0PeuZ8Gav4I8
-                O6H4r8TaTLqZtUvSb0XADMHzx5YHYl+5z60ngbQdH0DxZJc6t4th1vxffwMu1ZAQiD5iFA+nfHA4Arzr
-                w7z+z542c/fbUF3f99RUAeoT/HfwTDeW1slxeT+dszJFB8kW7H3iSOmecA1veLviV4Z8FSxQardubqRd
-                629um99vqewH1Nc74a+G/hvXPhVoFlcWjRJLHDfSyQELJJKVydzYOR8xGPSuc8KjR3+OHjGXxM9qLmA4
-                sxeldojzjI3ccLs/Amh72DzPW/DPijSfF2kLqej3PnW5YowK7WRh1VgehrXdgiM7HAUZNeP/AAT8mTXv
-                G9xpoH9iyaiPsmwYQ8ufl9sFfwxXsDgMjA9CMUPa4HlVv+0D4Oe2Mlyt9BJ5rIIhDvO0Yw5IOMHPTrwa
-                7lvGXh9PCg8TNqUQ0hk3ifB55xtx13Z4xjOa8W+D0fhO38LeJJ9cGmC4SeRC10U3+VsHADc4znp1NcJL
-                PqEfwp0FGi8zTm1udlSZsRvhY9oY5GBkydx3o8g6nvmh/Gzwdr2sQ6ZDPd2887iOJrmHajsegyCcZ98V
-                Y8WfFzw34R1ZtJuEvb3UFALw2cQcpkZAJJAzjnAzXDWGhW8l9pniP4h+MtLMdtIj2Ol2MqeQjA/KAF64
-                wOgPTk1qeK/Dt1a+Mb/xZ4H8U6dDq4ULf6fPOhV8ADByflyAOGxz3FDA7HSPiXoGq+DbrxQ5uLKwtJGi
-                mFygDqwxwApOc7hjHrWFpPxz8N6xrllplvp+rp9smWCK4lgQRlicDo5OM+1UdI1fQfid8KL6PWVs9BWW
-                6MM8qMscf2j5XDqTgEnjgnJ5571jaT4h1zwN4l0Hwx4kn0zxDpVxMkenXcRV5rc8KrY6jG4de3RuMU+o
-                dD0fxd8SvDXgqaO31a7c3Ui7hbwJvcL6nsB9TWn4f8W6L4n0I6zpt4rWSbvNaT5DEVGSHB6YHP05ryfw
-                v/ZEvxx8ZT+J3tRdQnFoL0qFEecZG7jhdn4E1xNxPKngv4jXGhkrok+rQxxGIYQxl3Jx7YKD6EVPQD19
-                /jt4GTVPsf2y6ZA203S25MQ98/ex74rE8TzR3H7RHgyaF1eKSwLo6nIYESkEVhfESDQbH4EaJbaNPZqr
-                y28rLG675jsbcSOpOTz6VrazJFL8efAckJBifS1ZCOhUrLimt/67C6HtlFFFAzlviQrN8O9bCqGPkdD6
-                bhmtPXStz4R1JhllksZSNw5OYz2pPFOlTa54W1PTLd0Sa5t2jRn+6CRxmuLfxH4vj8Kyabc+Bb6W8S1N
-                s8kVzGUdtu3cO5HemBJ8KJC0eoJnj7Jpj49zZRDP6D8q9Hrx7w9pfjrwPcyXiaJDq1nPZWcc0MVyqSxm
-                KIJtUdCQBj3x1rr7T4oeGpMR389xpNyPvQahbvEyn0zjB/OkB2Vc/wCOdTtdI8Eaxd3ZYRfZXjAX7zM4
-                2qB7kkVUl+Jfg2FN51+1f0WPc7H6BQTXOatLdfEzVtO06z0+7tvD9ldLd3d3dwGPz2TlY0U8nk8mgDpv
-                hzpt1pHw80SxvUZLiK2G9GHK5JOD9Aa0Lrwto174ktPENxZLJqlpGY4Zyx+VTntnBPJwcd62KKAILyzt
-                9Qsp7O7iWW3nQxyRt0ZSMEVza/DnwykOhQx2TpHocplsgJW+ViQxzk/N8wB5rq6KAMHVfCGlaz4j0nXb
-                tJTe6WWNuUfCnP8AeHfFZXiT4V+EfFWpHUdR00i7b/WSwStGZP8AexwT79a7OigDl9I+HfhbQotRi07T
-                BDFqEAt7lPNch0AIxyeM5OT1rV0DQNO8M6NBpOlQmG0hzsUsWOSSSSTyeTWnRQBh2Hg7w9pmp3+o2WlQ
-                Q3OoLsumUHbIvcbc7Rnvgc965yz+DHgix1xdVi0xy6P5iQPKzRI3XhT/ACORXf0UAc/4p8E6B4yt44tb
-                sFnMX+qlVikiZ64Yc49ulZWifCjwd4fv7O/0/TGS7tGZ45mndmJIxzzg8dPSu1ooAKKKKACiiigDC8Ue
-                D9D8Y2KWmtWQnSM7o3DFXjPqrDkfTpXK6f8AAzwLYXCzNp890VOQtzcMy/kMZ/GvR6KAMTXPCOh+ItFi
-                0fUbBHsIXV44YyYwhXpjbjAwSMe9Z/iz4c+G/GYtzq1o/m26eXFNDIUZV/u+hH1FdXRQBzPhLwD4d8FJ
-                N/Y1mY5ZhiSeVy8jD0yeg9hirNv4R0m28Y3XimOOT+07mAQSMXyu0Y6DscKPyrdooA53xT4G8PeMoo01
-                vT1neIYjmVikiD0DDt7Hiqvhb4beFvB9y11pOnbbsqV+0TSGRwD1AzwPwrrKKAOWj8AaHa+FdW8PWMUl
-                raamZGmKuWYM4wSM56YHHtVe6+G2i3/g7SfDN3Ldva6Y6SRSo4V2Zc9TjGDk12NFAHIeKvhl4X8Y3kd5
-                qtk/2tFCefDIUZlHQNjg/jzS+H/hr4Y8L6ymq6PZyW1wlubfAmZlYE5LEE8tx1rrqKACuV8VfDnwx4ym
-                juNY0/fcoNonicxvt9CR1H1rqqKAOU8PfDfwt4W1FNQ0jTfIukgMHmGV2ypOSSCcE+9ZmrfBnwRrGovf
-                TaU0MsjFpBbzNGrk9TtBwPwxXfUUAZ+i6Hpnh3TI9O0mzjtLSPJWNM9T1JJ5J9zWhRRQB57qfwU8Earq
-                z6jLp8sTyPvkigmKRue/A6Z9sVuat8P/AAzrPhyDQbnS4lsLbm3SHKGE+qkc89/Xvmumoo8gOY8JeAPD
-                3gqKddHsysk4xLNK5eRh6ZPQewxVnQPB+jeGdGudK023dLS5keSVHkLZLjB5PbAAreooA53RfBOj6D4T
-                n8NWiTHT51kWQSSZZhIMNzx2qXSvCOk6P4SPhm1jk/s5opImDPl2D53ZPr8xrdooAyvDnh6w8K6DbaNp
-                okFrb7tnmNuY5YsST9SazvF3gHw/42ihXWbRnlhz5U8TlJFB6jPcexzXTUUAc5ofgbw94e8P3OiadYhL
-                O6VluNzkvKGGDubr0OPbtVjTfCWi6X4XXw5BZK+lBGQwTHeGDEk5z15NbdFAHncPwP8AAUN+LoaTI4Db
-                hC9y5jH4Z5HsTXoUcaQxJFEipGihVRRgKB0AHpTqKAEdd6MuSMjGRXK+AfA8HgPRLjToLx7vzrlrhpXQ
-                IeQABgE9AK6uigDGi8K6PD4ouPEiWmNUuIBBJNvbDIMfw5xngDPtUWgeD9G8M6Nc6Vptu6WlzI8kqPIW
-                yXGDye2ABW9RQByll8OfDdn4Pfws1o9zpbu0hSdyW3E5yGGCCO2KwY/gV4FjtJ4PsFyzS4xM1yxePBz8
-                vYflXpNFAGFY+ENH07xNc+IbaCRdRuLdbeRzISCigAcHvhV59qZY+DNG0/xDq+txQu11qyBLpZG3RkAc
-                gLjv3610FFAHnJ+BvgQ6p9t/s2bbu3fZvtDeVn6dce2cV0HiL4f+GPFFlbWup6XEyWqCO3aImNolH8Kl
-                cce3SumooA5Pwv8ADXwt4PuWutJ07bdspX7RNIZHAPUDPA/ClHw58Nx+F9S8O29pJBp+oyGWdY5W3bsg
-                5BOcY2jj2rq6KAKumafb6Tpdpp1opW3tYlhiBOSFUYGT+Fcz4s+GXhfxnex3uq2bi7RQpmgkKM6joG7H
-                +ddhRQBm6FoOmeGtJi0zSbVba0i6IuSST1JJ5JPqa0W+6fpS0UPUD5w+FHw28O+NtN1W+1mG4ea31Bo1
-                8qYoGXAODj3J6Yr3afwnoNz4cTw9Npdu2kooVbbGFXHQg9QffOfer9jptjpkUkdhZ29rHJIZHWCMIGc9
-                WIHUn1q1QwOA0r4MeB9J1FL6LSmmljYNGtxM0iKR0O0nB/HNLr/wc8HeItYl1S7tJ47mZt8xgnKiRvUj
-                nn6YrvqKAOYl+HvheXwmPDJ0tF0tW3iNXYMH/v7s53e+f0rL8OfCHwh4Y1SPUrOyllu4jmJ7mUv5Z9QO
-                Bn3xXd0UAcf4s+GXhfxnex3uq2bi7RQpmgkKM6joG7H+da1j4R0HTvDR8O2+mwjSmQo8DZYPnqWJ5J9+
-                tbVFAHnEPwL8CQmc/wBnTv5qFVD3Lnys9156jsTmugs/APh+y1DRr+O3la60e2+y2kjysSEwRz2J5P51
-                09FABRRRQAUUUUAFRzQQ3CBJ4o5VByFdQwz680UUAQRaVp0JBisLWMg5BWFRz+VW6KKACiiigAooooAK
-                KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
-                KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK
-                KKKACiiigAooooAKKKKACiiigD//2Q==
-            </property>
-        </structure>
         <structure>
             <property name="name">cabecalho_rel_androd.png</property>
             <property name="type">image/png</property>
