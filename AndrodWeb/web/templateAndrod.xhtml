@@ -20,19 +20,25 @@
                     <td valign="middle" align="center"><h1>AndRod - Sistema de Controle Financeiro Pessoal</h1></td>
                 </tr>
             </table>
-            <div>
-                <div id="tituloFuncionalidade">
-                    <ui:insert name="tituloFuncionalidade">AndRod</ui:insert>
-                </div>
-                <div id="tituloDataHora" align="right">
-                    <h:graphicImage id="dataHora" alt="#" url="/imagens/interno/icone_relogio.jpg" />
-                    <h:outputText value="Data/Hora: "/>
-                    <h:outputText value="#{usuarioMB.dataAtual}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />
-                    </h:outputText>
-                </div>
-            </div>
         </div>
+        <table style="width: 100%" >
+            <tr>
+                <td>
+                    <div id="tituloFuncionalidade">
+                        <ui:insert name="tituloFuncionalidade">AndRod</ui:insert>
+                    </div>
+                </td>
+                <td>
+                    <div id="tituloDataHora" align="right">
+                        <h:graphicImage id="dataHora" alt="#" url="/imagens/externo/icone_relogio.jpg" />
+                        <h:outputText value="Data/Hora: "/>
+                        <h:outputText value="#{usuarioMB.dataAtual}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />
+                        </h:outputText>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <hr />
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
@@ -46,7 +52,6 @@
                     </h:commandLink>
                 </div>
                 <div id="tituloUltimoAcesso" align="right" >
-                    <h:graphicImage id="excluir" alt="#" url="/imagens/interno/icone_relogio.jpg" />
                     <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="Último acesso: "/>
                     <h:outputText rendered="#{not empty usuarioMB.ultimoAcesso}" value="#{usuarioMB.ultimoAcesso}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" timeZone="#{usuarioMB.timeZone}" />

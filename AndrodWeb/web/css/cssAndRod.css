@@ -95,7 +95,6 @@ root {
 #tituloDataHora {
     position: relative;
     float: right;
-    width: 30%;
 }
 
 #fildsetAcesso {
@@ -135,6 +134,10 @@ a:link, a:visited {
   text-decoration: none;
 }
 
+img {
+    border: 0px;
+}
+
 a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
@@ -150,7 +153,7 @@ a:link:hover, a:visited:hover  {
 #tituloUltimoAcesso {
     position: relative;
     float: right;
-    width: 30%;
+    width: 19%;
 }
 
 .tipoFinanca_CREDITO {
