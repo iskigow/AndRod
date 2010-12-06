@@ -70,7 +70,7 @@ public class UsuarioBO implements AndRodBO{
             Usuario usuarioSenha = getUsuarioDAO().recuperaUsuarioPorLoginESenha(usuarioSenhaAtual);
 
             if(usuarioSenha == null){
-                throw new Exception("A Senha Atual informa está inválida!");
+                throw new Exception("A Senha Atual informada está inválida!");
             }
 
             if(!usuario.getSenha().equals(usuario.getConfirmaSenha())){

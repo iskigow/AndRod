@@ -195,7 +195,7 @@
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select fin.id, fin.datafinanca, fin.valor, fin.descricao,
-		fin.tipofinanca, fin.datacadastro, COALESCE(cla.descricao, 'SEM CATEGORIA') descricaoClassificacao
+		fin.tipofinanca, fin.datacadastro, COALESCE(cla.descricao, 'SEM CLASSIFICAÇÃO') descricaoClassificacao
 from financa fin 
 	left join classificacao cla on fin.idclassificacaofinanca = cla.id
 where fin.idusuario = ?

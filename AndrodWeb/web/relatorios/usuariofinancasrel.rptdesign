@@ -95,7 +95,7 @@
                     <property name="columnName">descricaofinanca</property>
                     <text-property name="displayName">descricaofinanca</text-property>
                     <text-property name="heading">descricaofinanca</text-property>
-                    <property name="displayLength">255</property>
+                    <property name="displayLength">2147483647</property>
                     <property name="horizontalAlign">justify</property>
                     <property name="wordWrap">false</property>
                 </structure>
@@ -194,7 +194,7 @@
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select fin.id, fin.datafinanca, fin.valor, fin.descricao, fin.tipofinanca, fin.datacadastro, cla.descricao descricaofinanca
+            <xml-property name="queryText"><![CDATA[select fin.id, fin.datafinanca, fin.valor, fin.descricao, fin.tipofinanca, fin.datacadastro, COALESCE(cla.descricao, 'SEM CLASSIFICAÇÃO') descricaofinanca
 from financa fin 
 	left join classificacao cla on fin.idclassificacaofinanca = cla.id 
 where fin.idusuario = ?

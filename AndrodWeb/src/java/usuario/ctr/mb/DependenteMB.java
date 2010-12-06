@@ -111,7 +111,7 @@ public class DependenteMB extends BaseMB{
 
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getBundle().getString("v"), getBundle().getString("dependenteAlteradoFalha")));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getBundle().getString("dependenteAlteradoFalha"), getBundle().getString("dependenteAlteradoFalha")));
         }
     }
 
