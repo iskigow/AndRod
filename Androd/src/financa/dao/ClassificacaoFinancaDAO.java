@@ -49,7 +49,8 @@ public class ClassificacaoFinancaDAO implements AndrodDAO<ClassificacaoFinanca> 
 
             if (classificacaoFinanca.getSuperior() != null
                     && (classificacaoFinanca.getSuperior().getId() == null
-                    || classificacaoFinanca.getSuperior().getId().isEmpty())) {
+                    || classificacaoFinanca.getSuperior().getIdentificacao() == null
+                    || classificacaoFinanca.getSuperior().getIdentificacao().isEmpty())) {
                 classificacaoFinanca.setSuperior(null);
             } 
 
@@ -94,7 +95,8 @@ public class ClassificacaoFinancaDAO implements AndrodDAO<ClassificacaoFinanca> 
 
             if (classificacaoFinanca.getSuperior() != null
                     && (classificacaoFinanca.getSuperior().getId() == null
-                    || classificacaoFinanca.getSuperior().getId().isEmpty())) {
+                    || classificacaoFinanca.getSuperior().getIdentificacao() == null
+                    || classificacaoFinanca.getSuperior().getIdentificacao().isEmpty())) {
                 classificacaoFinanca.setSuperior(null);
             }
 
@@ -214,5 +216,17 @@ public class ClassificacaoFinancaDAO implements AndrodDAO<ClassificacaoFinanca> 
             entityManager.close();
         }
         logSaida();
+    }
+
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoIdentificacao(String identificacao, Usuario usuarioLogado) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoId(Long idClassificacao, Usuario usuarioLogado) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ClassificacaoFinanca recuperaClassificacaoFinancaPorIdentificacao(ClassificacaoFinanca superior, Usuario usuarioLogado) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

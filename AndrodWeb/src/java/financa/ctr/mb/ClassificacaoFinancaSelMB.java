@@ -63,7 +63,7 @@ public class ClassificacaoFinancaSelMB extends BaseMB {
     private void recuperaSuperior () {
         try {
 
-            String idClassificacao = (String) getParameterMap().get("idClassificacao");
+            Long idClassificacao = Long.valueOf((String) getParameterMap().get("idClassificacao"));
             ClassificacaoFinanca classificacaoSuperior = getFinancaFacade().recuperaSuperiorPorClassificacaoId(idClassificacao, getUsuarioLogado());
 
             if (classificacaoSuperior !=  null) {
@@ -84,7 +84,7 @@ public class ClassificacaoFinancaSelMB extends BaseMB {
     public String excluir() {
         ClassificacaoFinanca cf;
         try {
-            String idClassificacao = (String) getParameterMap().get("idClassificacao");
+            Long idClassificacao = Long.valueOf((String) getParameterMap().get("idClassificacao"));
             cf = new ClassificacaoFinanca();
             cf.setId(idClassificacao);
             cf = getFinancaFacade().recuperaClassificacaoFinancaPorId(cf, getUsuarioLogado());

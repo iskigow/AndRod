@@ -87,4 +87,16 @@ public class FinancaFacadeImpl implements IFinancaFacade {
     public void excluir(Financa f) throws Exception {
         getFinancaDAO().exclui(f);
     }
+
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoIdentificacao(String identificacao, Usuario usuarioLogado) throws Exception {
+        return getClassificacaoDAO().recuperaSuperiorPorClassificacaoIdentificacao(identificacao,usuarioLogado);
+    }
+
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoId(Long idClassificacao, Usuario usuarioLogado) throws Exception {
+        return getClassificacaoDAO().recuperaSuperiorPorClassificacaoId(idClassificacao,usuarioLogado);
+    }
+
+    public ClassificacaoFinanca recuperaClassificacaoFinancaPorIdentificacao(ClassificacaoFinanca superior, Usuario usuarioLogado) {
+        return getClassificacaoDAO().recuperaClassificacaoFinancaPorIdentificacao(superior,usuarioLogado);
+    }
 }

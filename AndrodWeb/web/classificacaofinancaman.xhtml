@@ -22,18 +22,18 @@
             <h:form id="classificacaoForm">
 
                 <h:commandButton value="#{bundle.novo}" action="#{classificacaoFinancaMB.novo}" immediate="true"/>
-                <h:commandButton value="#{bundle.gravar}" action="#{classificacaoFinancaMB.gravar}"/>
+                <h:commandButton value="#{not empty classificacaoFinancaMB.id ? bundle.alterar : bundle.cadastrar }" action="#{classificacaoFinancaMB.gravar}"/>
                 <h:commandButton id="todos" rendered="true" value="#{bundle.listar}" action="classificacaosel" immediate="true"/>
 
                 <h:messages errorStyle="color: white; background-color: tomato;" infoStyle="color: white; background-color: steelblue;" globalOnly="true" layout="table" />
 
-                <h:inputHidden id="MODO" value="#{classificacaoFinancaMB.MODO}"/>
+                <h:inputHidden id="id" value="#{classificacaoFinancaMB.id}"/>
 
                 <h:panelGrid columns="1">
 
                     <h:panelGroup layout="block">
                         <h:outputLabel id="idLabel" rendered="true" value="#{bundle.id}" for="idInput"/><br />
-                        <h:inputText id="idInput" value="#{classificacaoFinancaMB.idCF}" required="true" label="#{bundle.id}"
+                        <h:inputText id="idInput" value="#{classificacaoFinancaMB.identificacao}" required="true" label="#{bundle.id}"
                                      size="25" maxlength="100">
                         </h:inputText><br/>
                         <h:message id="idMsg" for="idInput" errorStyle="color: red"/>
@@ -69,7 +69,7 @@
                     <h:panelGrid columns="3">
                         <h:panelGroup layout="block">
                             <h:outputLabel id="idSuperiorLabel" rendered="true" value="#{bundle.idSuperior}" for="idSuperiorInput"/><br />
-                            <h:inputText id="idSuperiorInput" rendered="true" value="#{classificacaoFinancaMB.idSuperior}" onchange="submit();"
+                            <h:inputText id="idSuperiorInput" rendered="true" value="#{classificacaoFinancaMB.identificacaoSuperior}" onchange="submit();"
                                          size="25" maxlength="100" valueChangeListener="#{classificacaoFinancaMB.buscaSuperior}" immediate="true" />
                             <h:message id="idSuperiorMsg" for="idSuperiorInput" errorStyle="color: red"/>
                         </h:panelGroup>

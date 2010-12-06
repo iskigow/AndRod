@@ -27,7 +27,7 @@ public interface IFinancaFacade {
 
     public List<ClassificacaoFinanca> recuperaTodosUltimoNivelClassificacoesFinancas(Usuario usuarioLogado) throws Exception;
 
-    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoId(String idClassificacao, Usuario usuarioLogado) throws Exception;
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoIdentificacao(String identificacao, Usuario usuarioLogado) throws Exception;
 
     public void excluir(ClassificacaoFinanca cf) throws Exception;
 
@@ -42,4 +42,8 @@ public interface IFinancaFacade {
     public Financa recuperaFinancaPorId(Financa financa) throws Exception;
 
     public void excluir(Financa f) throws Exception;
+
+    public ClassificacaoFinanca recuperaSuperiorPorClassificacaoId(Long idClassificacao, Usuario usuarioLogado) throws Exception;
+
+    public ClassificacaoFinanca recuperaClassificacaoFinancaPorIdentificacao(ClassificacaoFinanca superior, Usuario usuarioLogado);
 }

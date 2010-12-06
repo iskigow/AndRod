@@ -16,22 +16,19 @@ import javax.faces.event.ValueChangeEvent;
 public class ClassificacaoFinancaMB extends BaseMB {
 
     private ClassificacaoFinanca cf;
-    private String MODO = "novo";
 
     /** Creates a new instance of ClassificacaoFinancaMB */
     public ClassificacaoFinancaMB() {
-        MODO = "novo";
     }
 
     public String novo() {
-        MODO = "novo";
         cf = null;
         return "classificacaoman";
     }
 
     public String editar() {
         try {
-            String idClassificacao = (String) getParameterMap().get("idClassificacao");
+            Long idClassificacao = Long.valueOf((String) getParameterMap().get("idClassificacao"));
             cf = new ClassificacaoFinanca();
             cf.setId(idClassificacao);
             cf = getFinancaFacade().recuperaClassificacaoFinancaPorId(cf, getUsuarioLogado());
@@ -43,21 +40,19 @@ public class ClassificacaoFinancaMB extends BaseMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possível editar!", "Não foi possível editar!"));
 
         }
-        setMODO("edicao");
         return "classificacaoman";
     }
 
     public void gravar() {
 
         try {
-            if ("novo".equals(MODO)) {
+            if (cf.getId() == null) {
                 getFinancaFacade().incluiClassificacaoFinanca(cf);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("classificacaoFinancaIncluidaSucesso"), getBundle().getString("classificacaoFinancaIncluidaSucesso")));
             } else {
                 getFinancaFacade().alteraClassificacaoFinanca(cf);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("classificacaoFinancaAlteradaSucesso"), getBundle().getString("classificacaoFinancaAlteradaSucesso")));
             }
-            MODO = "edicao";
 
         } catch (Exception e) {
                 Logger.getLogger(ClassificacaoFinanca.class.getName()).log(Level.SEVERE, null, e);
@@ -73,7 +68,7 @@ public class ClassificacaoFinancaMB extends BaseMB {
         if (phaseId.equals(PhaseId.ANY_PHASE)) {
             event.setPhaseId(PhaseId.UPDATE_MODEL_VALUES);
             if (event.getNewValue() != null && !((String) event.getNewValue()).isEmpty()) {
-                getSuperior().setId((String) event.getNewValue());
+                getSuperior().setIdentificacao((String) event.getNewValue());
                 buscaSuperior();
             }
         }
@@ -82,7 +77,7 @@ public class ClassificacaoFinancaMB extends BaseMB {
     public void buscaSuperior() {
         ClassificacaoFinanca superior = getSuperior();
         try {
-            superior = getFinancaFacade().recuperaClassificacaoFinancaPorId(superior,getUsuarioLogado());
+            superior = getFinancaFacade().recuperaClassificacaoFinancaPorIdentificacao(superior,getUsuarioLogado());
             
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(ClassificacaoFinancaMB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -110,14 +105,14 @@ public class ClassificacaoFinancaMB extends BaseMB {
         }
     }
 
-    public String getIdCF() {
+    public String getIdentificacao() {
         initialCondiction();
-        return cf.getId();
+        return cf.getIdentificacao();
     }
 
-    public void setIdCF(final String id) {
+    public void setIdentificacao(final String identificacao) {
         initialCondiction();
-        cf.setId(id);
+        cf.setIdentificacao(identificacao);
     }
 
     public String getDescricao() {
@@ -148,14 +143,14 @@ public class ClassificacaoFinancaMB extends BaseMB {
         cf.setSuperior(superior);
     }
 
-    public String getIdSuperior() {
+    public String getIdentificacaoSuperior() {
         initialCondictionSuperior();
-        return cf.getSuperior().getId();
+        return cf.getSuperior().getIdentificacao();
     }
 
-    public void setIdSuperior(final String idSuperior) {
+    public void setIdentificacaoSuperior(final String identificacao) {
         initialCondictionSuperior();
-        cf.getSuperior().setId(idSuperior);
+        cf.getSuperior().setIdentificacao(identificacao);
     }
 
     public String getDescricaoResumidaSuperior() {
@@ -163,11 +158,13 @@ public class ClassificacaoFinancaMB extends BaseMB {
         return cf.getSuperior().getDescricaoResumida();
     }
 
-    public String getMODO() {
-        return MODO;
+    public Long getId() {
+        initialCondiction();
+        return cf.getId();
     }
 
-    public void setMODO(String MODO) {
-        this.MODO = MODO;
+    public void setId(Long id) {
+        initialCondiction();
+        cf.setId(id);
     }
 }

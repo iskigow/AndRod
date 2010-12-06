@@ -9,11 +9,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,21 +32,28 @@ import usuario.to.Usuario;
 
 @NamedQueries({
    @NamedQuery(name = "ClassificacaoFinanca.findById", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.id = :id AND cf.usuario = :usuario"),
+   @NamedQuery(name = "ClassificacaoFinanca.findByIdentificacao", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.identificacao = :identificacao AND cf.usuario = :usuario"),
    @NamedQuery(name = "ClassificacaoFinanca.findSuperiorById", query = "SELECT cf.superior FROM ClassificacaoFinanca cf WHERE cf.id = :id AND cf.usuario = :usuario"),
+   @NamedQuery(name = "ClassificacaoFinanca.findSuperiorByIdentificacao", query = "SELECT cf.superior FROM ClassificacaoFinanca cf WHERE cf.identificacao = :identificacao AND cf.usuario = :usuario"),
    @NamedQuery(name = "ClassificacaoFinanca.findAll", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario"),
    @NamedQuery(name = "ClassificacaoFinanca.findAllUltimoNivel", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario AND NOT EXISTS ( SELECT cfAux FROM ClassificacaoFinanca cfAux WHERE cfAux.superior = cf AND cfAux.usuario = cf.usuario )")
 })
 public class ClassificacaoFinanca implements Serializable {
 
     @Id
+    @SequenceGenerator(name="CLASSIFICACAO_SEQUENCE_GENERATOR", sequenceName="CLASSIFICACAO_ID_SEQ")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CLASSIFICACAO_SEQUENCE_GENERATOR")
     @Column(nullable = false, unique = true)
-    private String id;
+    private Long id;
+
+    @Column(nullable = false)
+    private String identificacao;
 
     @ManyToOne(fetch=FetchType.LAZY,targetEntity=Usuario.class)
     @JoinColumn(nullable=false)
     private Usuario usuario;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String descricao;
 
     @Transient
@@ -107,14 +117,6 @@ public class ClassificacaoFinanca implements Serializable {
         this.superior = superior;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -144,7 +146,7 @@ public class ClassificacaoFinanca implements Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder("").append(this.id).append(" - ").append(this.getDescricaoResumida()).toString();
+        return new StringBuilder("").append(this.identificacao).append(" - ").append(this.getDescricaoResumida()).toString();
     }
 
     public Date getDataCadastro() {
@@ -153,5 +155,21 @@ public class ClassificacaoFinanca implements Serializable {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getIdentificacao() {
+        return identificacao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIdentificacao(String identificacao) {
+        this.identificacao = identificacao;
     }
 }
