@@ -34,7 +34,7 @@
                     font-family: Arial, Verdana;
                 }
             </style>
-             
+
             <h:form id="usuariomanForm">
 
                 <c:if test="#{not empty sessionScope['usuarioLogado']}">
@@ -51,7 +51,9 @@
                 <h:messages errorStyle="color: white; background-color: tomato;" infoStyle="color: white; background-color: steelblue;" globalOnly="true" layout="table" />
 
                 <fieldset>
+
                     <legend><h:outputLabel rendered="true" value="#{bundle.infoPessoa}"/></legend>
+
                     <h:panelGrid>
 
                         <h:outputLabel rendered="true" value="#{bundle.nomeResumido}" for="nomeResumido"/>
@@ -74,13 +76,16 @@
                         <h:message for="cpf" errorStyle="color: red"/>
 
                     </h:panelGrid>
+
                 </fieldset>
-                
+
                 <fieldset>
                     <legend><h:outputLabel rendered="true" value="#{bundle.infoUsuario}"/></legend>
+
                     <c:if test="#{not empty sessionScope['usuarioLogado']}">
-                            <h:commandButton value="#{bundle.alterarUsuarioSenhaAtual}" action="#{usuarioMB.alterarUsuarioSenhaAtual}"/>
+                        <h:commandButton value="#{bundle.alterarUsuarioSenhaAtual}" action="#{usuarioMB.alterarUsuarioSenhaAtual}"/>
                     </c:if>
+
                     <h:panelGrid>
 
                         <h:inputHidden id="idUsuario" value="#{usuarioMB.idUsuario}" />
@@ -117,11 +122,7 @@
                         <h:message for="email" errorStyle="color: red"/>
                     </h:panelGrid>
                 </fieldset>
-
             </h:form>
-
         </f:view>
-
     </ui:define>
-
 </ui:composition>
