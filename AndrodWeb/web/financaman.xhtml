@@ -36,13 +36,13 @@
             <h:form id="financaForm">
 
                 <h:commandButton value="#{bundle.novo}" action="#{financaMB.novo}" immediate="true"/>
-                <h:commandButton value="#{bundle.gravar}" action="#{financaMB.gravar}"/>
-                <h:commandButton id="todos" rendered="true" value="#{bundle.visualizar}" action="financasel" immediate="true"/>
+                <h:commandButton value="#{not empty financaMB.id ? bundle.alterar : bundle.cadastrar }" action="#{financaMB.gravar}"/>
+                <h:commandButton id="todos" rendered="true" value="#{bundle.visualizar}" action="#{financaSelMB.listarTodasFinancas}" immediate="true"/>
 
                 <!-- Tag utilizada para exibir mensagens de sucesso -->
                 <h:messages errorStyle="color: white; background-color: tomato;" infoStyle="color: white; background-color: steelblue;" globalOnly="true" layout="table" />
 
-                <h:inputHidden id="MODO" value="#{financaMB.MODO}"/>
+                <h:inputHidden id="id" value="#{financaMB.id}"/>
 
                 <h:panelGrid columns="1">
 

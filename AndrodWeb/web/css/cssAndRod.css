@@ -152,3 +152,11 @@ a:link:hover, a:visited:hover  {
     float: right;
     width: 30%;
 }
+
+.tipoFinanca_CREDITO {
+    color: blue;
+}
+
+.tipoFinanca_DEBITO {
+    color: red;
+}

@@ -31,8 +31,7 @@ import usuario.to.Usuario;
    @NamedQuery(name = "ClassificacaoFinanca.findById", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.id = :id AND cf.usuario = :usuario"),
    @NamedQuery(name = "ClassificacaoFinanca.findSuperiorById", query = "SELECT cf.superior FROM ClassificacaoFinanca cf WHERE cf.id = :id AND cf.usuario = :usuario"),
    @NamedQuery(name = "ClassificacaoFinanca.findAll", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario"),
-   @NamedQuery(name = "ClassificacaoFinanca.findAllUltimoNivel", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario AND NOT EXISTS ( SELECT cfAux FROM ClassificacaoFinanca cfAux WHERE cfAux.superior = cf AND cfAux.usuario = cf.usuario )"),
-   @NamedQuery(name = "ClassificacaoFinanca.findChild", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.superior = :superior AND cf.usuario = :usuario")
+   @NamedQuery(name = "ClassificacaoFinanca.findAllUltimoNivel", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario AND NOT EXISTS ( SELECT cfAux FROM ClassificacaoFinanca cfAux WHERE cfAux.superior = cf AND cfAux.usuario = cf.usuario )")
 })
 public class ClassificacaoFinanca implements Serializable {
 

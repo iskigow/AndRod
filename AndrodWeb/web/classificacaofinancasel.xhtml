@@ -5,6 +5,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
                 template="./templateAndrod.xhtml">
 
     <ui:define name="tituloFuncionalidade">
@@ -26,7 +28,7 @@
                 
                 <h:messages errorStyle="color: white; background-color: salmon;" infoStyle="color: white; background-color: lightblue;" globalOnly="true" layout="table" />
 
-                <h:dataTable value="#{classificacaoFinancaSelMB.classificacoes}" var="classificacao" border="1" >
+                <rich:dataTable value="#{classificacaoFinancaSelMB.classificacoes}" var="classificacao" border="1" >
 
                     <h:column>
                         <f:facet name="header"><h:outputText rendered="true" value="#{bundle.idAbreviado}"/></f:facet>
@@ -64,14 +66,10 @@
                         </h:commandLink>
                     </h:column>
 
-                </h:dataTable>
+                </rich:dataTable>
 
                 <h:inputTextarea readonly="true" cols="40" rows="3" id="superior" value="#{classificacaoFinancaSelMB.superior}"  />
-
             </h:form>
-
         </f:view>
-
     </ui:define>
-
 </ui:composition>

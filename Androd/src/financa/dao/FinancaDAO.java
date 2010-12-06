@@ -8,10 +8,12 @@ package financa.dao;
 import androd.dao.AndrodDAO;
 import androd.dao.JPADAOFactory;
 import financa.to.Financa;
-import java.lang.reflect.Field;
+import financa.to.TipoFinanca;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
+import usuario.to.Usuario;
 
 /**
  *
@@ -25,16 +27,12 @@ public class FinancaDAO implements AndrodDAO<Financa> {
 
     private synchronized void logEntrada(String METODO) {
         this.METODO = METODO;
-        log.debug("# ENTROU # Classe: " + this.getClass().getCanonicalName() + " - Método: " + this.METODO);
+        log.info("# ENTROU # Classe: " + this.getClass().getCanonicalName() + " - Método: " + this.METODO);
     }
 
     private synchronized void logSaida() {
-        log.debug("# SAIU #Classe: " + this.getClass().getCanonicalName() + " - Método: " + this.METODO);
+        log.info("# SAIU #Classe: " + this.getClass().getCanonicalName() + " - Método: " + this.METODO);
         this.METODO = "QUE METODO?!";
-    }
-
-    public Financa recuperaObjeto(Financa objetoParametro, Field ... forFields) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public List<Financa> recuperaObjetos() throws Exception {
@@ -100,6 +98,71 @@ public class FinancaDAO implements AndrodDAO<Financa> {
     }
 
     public void exclui(Financa entidadeInstancia) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        logEntrada("exclui");
+        try {
+            entityManager = JPADAOFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            if (entidadeInstancia == null) {
+                throw new NullPointerException("Finança Invalida.");
+            }
+
+            entidadeInstancia = entityManager.merge(entidadeInstancia);
+            entityManager.remove(entidadeInstancia);
+            entityManager.getTransaction().commit();
+
+        }catch (Exception e) {
+            log.error("Ocorreu um erro na exclusão da Finança. Método: exclui", e);
+
+            entityManager.getTransaction().rollback();
+
+            throw e;
+        }finally {
+            entityManager.close();
+        }
+        logSaida();
+    }
+
+    public List<Financa> recuperaObjetos(Usuario usuarioLogado) throws Exception {
+        logEntrada("recuperaObjetos");
+        try {
+            entityManager = JPADAOFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            TypedQuery<Financa> query = entityManager.createNamedQuery("Financa.findAll",
+                    Financa.class).setParameter("usuario", usuarioLogado);
+            List<Financa> cfs = query.getResultList();
+            return cfs != null && !cfs.isEmpty() ? cfs : null;
+        } catch (Exception e) {
+            log.error("Ocorreu um erro", e);
+            throw e;
+        } finally {
+            entityManager.close();
+            logSaida();
+        }
+    }
+
+    public List<Financa> recuperaObjetos(TipoFinanca tipoFinanca, Usuario usuarioLogado) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public Financa recuperaObjetoPorId(Financa financa) throws Exception {
+        logEntrada("recuperaObjetoPorId");
+        try {
+            entityManager = JPADAOFactory.createEntityManager();
+
+            entityManager.getTransaction().begin();
+
+            TypedQuery<Financa> query = entityManager.createNamedQuery("Financa.findById",
+                    Financa.class).setParameter("id", financa.getId()).setParameter("usuario", financa.getUsuario());
+            List<Financa> cfs = query.getResultList();
+            return cfs != null && !cfs.isEmpty() ? cfs.get(0) : null;
+        } catch (Exception e) {
+            log.error("Ocorreu um erro", e);
+            throw e;
+        } finally {
+            entityManager.close();
+            logSaida();
+        }
     }
 }

@@ -7,6 +7,7 @@ package financa.facade;
 
 import financa.to.ClassificacaoFinanca;
 import financa.to.Financa;
+import financa.to.TipoFinanca;
 import java.util.List;
 import usuario.to.Usuario;
 
@@ -28,11 +29,17 @@ public interface IFinancaFacade {
 
     public ClassificacaoFinanca recuperaSuperiorPorClassificacaoId(String idClassificacao, Usuario usuarioLogado) throws Exception;
 
-    public Financa recuperaFinancaPorId(Financa financa) throws Exception;
-
     public void excluir(ClassificacaoFinanca cf) throws Exception;
 
     public void incluiFinanca(Financa financa) throws Exception;
 
     public void alteraFicacaoFinanca(Financa financa) throws Exception;
+
+    public List<Financa> recuperaTodasFinancas(Usuario usuarioLogado) throws Exception;
+
+    public List<Financa> recuperaTodasFinancasPorTipoFinanca(TipoFinanca tipoFinanca, Usuario usuarioLogado) throws Exception;
+
+    public Financa recuperaFinancaPorId(Financa financa) throws Exception;
+
+    public void excluir(Financa f) throws Exception;
 }

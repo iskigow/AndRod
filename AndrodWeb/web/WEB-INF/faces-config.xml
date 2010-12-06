@@ -53,14 +53,14 @@
     <managed-bean>
         <managed-bean-name>classificacaoFinancaMB</managed-bean-name>
         <managed-bean-class>financa.ctr.mb.ClassificacaoFinancaMB</managed-bean-class>
-
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
      <managed-bean>
         <managed-bean-name>classificacaoFinancaSelMB</managed-bean-name>
         <managed-bean-class>financa.ctr.mb.ClassificacaoFinancaSelMB</managed-bean-class>
-
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>relatorioMB</managed-bean-name>
@@ -78,6 +78,12 @@
         <managed-bean-name>financaMB</managed-bean-name>
         <managed-bean-class>financa.ctr.mb.FinancaMB</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>financaSelMB</managed-bean-name>
+        <managed-bean-class>financa.ctr.mb.FinancaSelMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <navigation-rule>
@@ -142,6 +148,11 @@
         <navigation-case>
             <from-outcome>financaman</from-outcome>
             <to-view-id>/financaman.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>financasel</from-outcome>
+            <to-view-id>/financasel.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>

@@ -5,64 +5,69 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:c="http://java.sun.com/jstl/core"
-                template="./templateAndrod.xhtml">
+                template="./templateAndrod.xhtml"
+                xmlns:rich="http://richfaces.org/rich">
+
+    <ui:define name="tituloFuncionalidade">
+        <h:form>
+        <h:commandLink action="home">
+            <h:outputLabel value="Home"/>
+        </h:commandLink> &gt; <h:outputLabel id="tituloFuncionalidade" value="#{bundle.listarFinanca}"/>
+        </h:form>
+    </ui:define>
 
     <ui:define name="content">
 
         <f:view>
+            <h:form id="ficacaoselForm">
 
-            <h2><h:outputLabel id="tituloFuncionalidade" rendered="true" value="#{bundle.listarClassificacaoFinanca}"/></h2>
-
-            <h:form id="classificacaoselForm">
+                <h:commandButton id="novo" rendered="true" value="#{bundle.novo}" action="financaman"/>
 
                 <!-- Tag utilizada para exibir mensagens de sucesso -->
                 <h:messages errorStyle="color: red" infoStyle="color: blue" globalOnly="true"/>
 
-                <!-- <h:commandButton rendered="true" value="#{bundle.novoDependente}" action="dependenteman"/> -->
+                <rich:dataTable  value="#{financaSelMB.financas}" var="financa" border="0" >
 
-                <h:commandButton id="novo" rendered="true" value="#{bundle.novo}" action="manter_classificacao_financa"/>
-                <h:commandButton id="ultimoNivel" rendered="true" value="#{bundle.ultimoNivel}" action="#{classificacaoFinancaSelMB.ultimoNivel}"/>
-                <h:commandButton id="todos" rendered="true" value="#{bundle.todos}" action="#{classificacaoFinancaSelMB.todos}"/>
+                    <rich:column sortable="true" sortBy="#{financa.dataFinanca}">
+                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.data}"/></f:facet>
+                        <h:outputText rendered="true" value="#{financa.dataFinanca}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" type="both" timeZone="#{financaSelMB.timeZone}" />
+                        </h:outputText>
+                    </rich:column>
 
-                <h:dataTable value="#{classificacaoFinancaSelMB.classificacoes}" var="classificacao" border="1" >
+                    <rich:column>
+                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.descricao}" /></f:facet>
+                        <h:outputText rendered="true" value="#{financa.descricao}" />
+                    </rich:column>
 
-                    <h:column>
-                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.idAbreviado}"/></f:facet>
-                        <h:outputText rendered="true" value="#{classificacao.id}" />
-                    </h:column>
+                    <rich:column>
+                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.valor}" /></f:facet>
+                        <h:outputText rendered="true" value="#{financa.valor}">
+                            <f:convertNumber type="currency" id="valorConverter" locale="pt-BR" minFractionDigits="2" maxFractionDigits="2" maxIntegerDigits="7" groupingUsed="true" />
+                        </h:outputText>
+                    </rich:column>
 
-                    <h:column>
-                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.nomeResumido}" /></f:facet>
-                        <h:outputText rendered="true" value="#{classificacao.descricaoResumida}" />
-                    </h:column>
+                    <rich:column>
+                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.tipoFinanca}" /></f:facet>
+                        <h:outputText styleClass="tipoFinanca_#{financa.tipoFinanca.nome}" rendered="true" value="#{financa.tipoFinanca.nome}" />
+                    </rich:column>
 
-                    <h:column>
-                        <f:facet name="header"><h:outputText rendered="true" value="#{bundle.nomeCompleto}" /></f:facet>
-                        <h:outputText rendered="true" value="#{classificacao.descricao}" />
-                    </h:column>
-
-                    <h:column>
-                        <h:commandLink action="#{classificacaoFinancaSelMB.mostraInfoSuperior}">
-                            INF. SUP.
-                            <f:param name="idClassificacao" value="#{classificacao.id}"/>
+                    <rich:column>
+                        <h:commandLink action="#{financaMB.editar}">
+                            <h:graphicImage id="editar" alt="#" url="/imagens/interno/icone_editar.gif" />
+                            <f:param name="idFinanca" value="#{financa.id}"/>
                         </h:commandLink>
-                    </h:column>
+                    </rich:column>
 
-                    <h:column>
-                        <h:commandLink action="#{classificacaoFinancaMB.editar}">
-                            <h:graphicImage id="editar" alt="#" url="/imagens/icone_editar.gif" />
-                            <f:param name="idClassificacao" value="#{classificacao.id}"/>
+                    <rich:column>
+                        <h:commandLink action="#{financaSelMB.excluir}">
+                            <h:graphicImage id="excluir" alt="#" url="/imagens/interno/icone_excluir.gif" />
+                            <f:param name="idFinanca" value="#{financa.id}"/>
                         </h:commandLink>
-                    </h:column>
+                    </rich:column>
 
-                </h:dataTable>
-
-                <h:inputTextarea readonly="true" cols="40" rows="3" id="superior" value="#{classificacaoFinancaSelMB.superior}"  />
-
+                </rich:dataTable>
             </h:form>
-
         </f:view>
-
     </ui:define>
-
 </ui:composition>

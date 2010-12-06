@@ -23,27 +23,22 @@ import javax.faces.context.FacesContext;
 public class FinancaMB extends BaseMB {
 
     private Financa financa;
-    private String MODO = "novo";
-
 
     /** Creates a new instance of FinancaMB */
     public FinancaMB() {
         super();
-        MODO = "novo";
     }
 
     public String novo() {
-        MODO = "novo";
         financa = null;
         return "financaman";
     }
 
     public String editar() {
         try {
-            Long idFinanca = (Long) getParameterMap().get("idFinanca");
+            Long idFinanca = Long.valueOf((String)getParameterMap().get("idFinanca"));
             financa = new Financa(idFinanca,getUsuarioLogado());
             financa = getFinancaFacade().recuperaFinancaPorId(financa);
-            setMODO("edicao");
         } catch (Exception e) {
 
             Logger.getLogger(ClassificacaoFinanca.class.getName()).log(Level.SEVERE, null, e);
@@ -51,20 +46,19 @@ public class FinancaMB extends BaseMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao recuperar a Financa para edição", "Problema ao recuperar a Financa para edição"));
 
         }
-        return "manterfinancaman";
+        return "financaman";
     }
 
     public void gravar() {
 
         try {
-            if ("novo".equals(MODO)) {
+            if (financa.getId() == null) {
                 getFinancaFacade().incluiFinanca(financa);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("financaIncluidaSucesso"), getBundle().getString("financaIncluidaSucesso")));
             } else {
                 getFinancaFacade().alteraFicacaoFinanca(financa);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("financaAlteradaSucesso"), getBundle().getString("financaAlteradaSucesso")));
             }
-            MODO = "edicao";
 
         } catch (Exception e) {
                 Logger.getLogger(ClassificacaoFinanca.class.getName()).log(Level.SEVERE, null, e);
@@ -112,14 +106,6 @@ public class FinancaMB extends BaseMB {
     public void setId(Long id) {
         initialCondiction();
         financa.setId(id);
-    }
-
-    public String getMODO() {
-        return MODO;
-    }
-
-    public void setMODO(String MODO) {
-        this.MODO = MODO;
     }
 
     public TipoFinanca getCredito() {

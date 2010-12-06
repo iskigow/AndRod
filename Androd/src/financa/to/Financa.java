@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +29,13 @@ import usuario.to.Usuario;
 @Entity
 @Table(name="FINANCA")
 
+@NamedQueries({
+   @NamedQuery(name = "Financa.findAll", query = "SELECT f FROM Financa f WHERE f.usuario = :usuario ORDER BY f.dataFinanca ASC"),
+   @NamedQuery(name = "Financa.findById", query = "SELECT f FROM Financa f WHERE f.id = :id AND f.usuario = :usuario")
+//   @NamedQuery(name = "Financa.findSuperiorById", query = "SELECT cf.superior FROM ClassificacaoFinanca cf WHERE cf.id = :id AND cf.usuario = :usuario"),
+//   @NamedQuery(name = "Financa.findAllUltimoNivel", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.usuario = :usuario AND NOT EXISTS ( SELECT cfAux FROM ClassificacaoFinanca cfAux WHERE cfAux.superior = cf AND cfAux.usuario = cf.usuario )"),
+//   @NamedQuery(name = "Financa.findChild", query = "SELECT cf FROM ClassificacaoFinanca cf WHERE cf.superior = :superior AND cf.usuario = :usuario")
+})
 public class Financa implements Serializable {
 
     @Id
